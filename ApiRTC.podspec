@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 s.name         = 'ApiRTC'
 s.module_name  = 'ApiRTC'
-s.version      = '0.0.1'
+s.version      = '0.1.0'
 s.summary      = 'ApiRTC framework'
 s.description  = 'ApiRTC framework'
 s.homepage     = 'http://apizee.com'
@@ -11,7 +11,7 @@ s.author      = { 'Apizee' => 'contact@apizee.com' }
 
 s.ios.deployment_target = '9.0'
 
-s.source = { :path => "./ApiRTC"}
+s.source = { :path => "./ApiRTC.framework"}
 
 s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 
