@@ -4,10 +4,10 @@ s.name         = 'ApiRTC'
 s.module_name  = 'ApiRTC'
 s.version      = '0.1.0'
 s.summary      = 'ApiRTC framework'
-s.description  = 'ApiRTC framework'
-s.homepage     = 'http://apizee.com'
+s.description  = 'TODO'
+s.homepage     = 'https://github.com/apizee/ApiRTC-ios'
 s.license      = { :type => 'MIT' }
-s.author      = { 'Apizee' => 'contact@apizee.com' }
+s.author      = { 'Aleksandr Khorobrykh' => 'aleksandr.khorobrykh@apizee.com', 'Frederic Luart' => 'frederic.luart@apizee.com', 'Samuel Liard' => 'samuel.liard@apizee.com'  }
 
 s.ios.deployment_target = '9.0'
 
