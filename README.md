@@ -18,7 +18,9 @@ ApiKey is used to authentify your account.
 
 ## Installation
 
+```
 pod ‘ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => ‘0.1.0'
+```
 
 ## Initialization
 
