@@ -42,7 +42,7 @@ All code units are described in the [API Reference](http://docv2.apizee.com/sdk/
 ## Installation
 
 ```
-pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.1.0'
+pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.2.0'
 ```
 
 ## Initialization
@@ -182,4 +182,4 @@ You can turn on/off capture like this:
 session.isCapturing ? session.stopCapture() : session.startCapture()
 ```
 
-`session.startCapture` is shortcut for `setCapture(...)` used front camera with default format.
+`session.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
