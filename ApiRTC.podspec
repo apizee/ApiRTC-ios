@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 s.name         = 'ApiRTC'
 s.module_name  = 'ApiRTC'
-s.version      = '0.1.0'
+s.version      = '0.2.0'
 s.summary      = 'ApiRTC is a WebRTC Platform as a Service that simplifies developers access to WebRTC technology'
 s.description  = 'ApiRTC cloud-based WebRTC API are built for web and mobile developers. Empower you website with real-time text, audio and video interaction by leveraging our javascript library (compatible Node.js or Angular.js) or use our plugins for your mobile apps. Apizee takes care of browser compatibility, security and NAT traversal issues for you.'
 s.homepage     = 'https://apirtc.com'
@@ -11,7 +11,7 @@ s.author      = { 'Aleksandr Khorobrykh' => 'aleksandr.khorobrykh@apizee.com', '
 
 s.ios.deployment_target = '9.0'
 
-s.source = { :git => 'https://github.com/apizee/ApiRTC-ios.git', :tag => '0.1.0' }
+s.source = { :git => 'https://github.com/apizee/ApiRTC-ios.git', :tag => '0.2.0' }
 
 s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 
