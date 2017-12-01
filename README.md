@@ -1,5 +1,23 @@
-# ApiRTC iOS framework
-This document describes ApiRTC iOS framework v.0.1.0
+# ApiRTC iOS SDK
+
+ApiRTC cloud-based WebRTC API are built for web and mobile developers. Empower you website with real-time text, audio and video interaction by leveraging our javascript library (compatible Node.js or Angular.js) or use our plugins for your mobile apps. 
+
+[Apizee](https://apizee.com/) takes care of browser compatibility, security and NAT traversal issues for you.
+
+# Tutorial
+This tutorial describes how to use ApiRTC with examples from [Sample](TODO) **TODO**
+
+* [Main classes](#main-classes)
+* [First steps](#first-steps)
+    - [Create acount](#create-an-account-to-get-your-key)
+    - [Installation](#installation)
+    - [Initialization](#initialization)
+* [Basic video call](#basic-video-call)
+* [Handling video formats](#video-formats)
+* [Switching camera](#switching-camera)
+* [Mute audio](#mute-audio)
+* [API references](http://docv2.apizee.com/sdk/ios/index.html)
+* [Sample](TODO) **TODO**
 
 ## Main classes
 
@@ -8,11 +26,15 @@ This document describes ApiRTC iOS framework v.0.1.0
 
 All code units are described in the [API Reference](http://docv2.apizee.com/sdk/ios/index.html)
 
-# Quickstart
+## Requirements
 
-## Create your account to get your key
+* Swift
+* iOS 9+
+* Xcode 9+
 
-ApiKey is used to authentify your account.
+# First steps
+
+## Create an account to get your API key
 
 [Create an account](https://apirtc.com/get-key/)
 
@@ -31,15 +53,16 @@ Initialize framework with `your_api_key`:
 ApiRTC.initialize(apiKey: "your_api_key")
 ```
 
-Add SDK events handler:
+You should attach handlers for SDK events:
 
 ```
 ApiRTC.onEvent { event in
     switch event {
     case .connected:
         ...
-    case .incomingSession(let session):
-    // Provide incoming sessions handler
+    case .incomingSession(let session): // RTCSession
+        // Provide incoming sessions handler, eg:
+        self.currentSession = session
     case .error(let error):
         ...
     }
@@ -49,10 +72,10 @@ ApiRTC.onEvent { event in
 Connect:
 
 ```
-ApiRTC.connect()
+ApiRTC.connect() // `Event.connected` should be fired
 ```
 
-## Making a video call
+# Basic video call
 
 Create video call session:
 
@@ -60,7 +83,7 @@ Create video call session:
 session = ApiRTC.createSession(type: .videoCall, destinationId: "some_number")
 ```
 
-Add session events handler:
+For each session events handler should be attached:
 
 ```
 session.onEvent { event in
@@ -68,12 +91,13 @@ session.onEvent { event in
     case .call:
         ...
     case .localCaptureSession(let captureSession):
-        // Use CameraView or provide your own
+        // Use CameraView or provide your own, eg:
         DispatchQueue.main.async {
-        self.cameraView.captureSession = captureSession
+            self.cameraView.previewLayer.videoGravity = .resizeAspectFill
+            self.cameraView.captureSession = captureSession
         }
     case .remoteMediaStream(let mediaStream):
-        // Use RemoteVideoView or provide your own
+        // Use RemoteVideoView or provide your own, eg:
         if let videoTrack = mediaStream.videoTracks.first {
             DispatchQueue.main.async {
                 self.remoteVideoTrack = videoTrack
@@ -94,16 +118,51 @@ Call:
 session.start()
 ```
 
+# Video formats
 
-# API Reference
+720p video format is used by default for local capture session.
 
-Check [API Reference](http://docv2.apizee.com/sdk/ios/index.html) to have a complete description of available functionality.
+You can define another format from the list of supported formats. It can be done before or during the call, eg:
 
-# Tutorial
+```
+if let device = ApiRTC.getCaptureDevice(position: .front) {
+    
+    let formats = ApiRTC.supportedFormats(device)
+    
+    let format = ...
+    
+    session.setCapture(with: device, format: format)
+}
+```
 
-Check [Tutorial](TODO) **TODO** describing in detail how to use any part of the framework.
+# Switching camera
 
-# Sample
+You can switch camera easily:
 
-Check [Sample](TODO) **TODO** app for better understanding on working example.
+```
+if let session = currentSession as? RTCVideoSession {
+    session.switchCamera()
+}
+```
 
+Actually it's just a shortcut for `setCapture(...)`. You may redefine device or format by yourself:
+
+```
+guard let currentDevice = session.captureDevice else {
+    return
+}
+
+let switchedPosition: AVCaptureDevice.Position = currentDevice.position == .front ? .back : .front
+
+if let device = ApiRTC.getCaptureDevice(position: switchedPosition) {
+    session.setCapture(with: device) // you may also define format here
+}
+```
+
+# Mute audio
+
+You can mute/unmute audio by:
+
+```
+session.isLocalAudioEnabled = false
+```
