@@ -16,6 +16,7 @@ This tutorial describes how to use ApiRTC with examples from [Sample](TODO) **TO
 * [Handling video formats](#video-formats)
 * [Switching camera](#switching-camera)
 * [Mute audio](#mute-audio)
+* [Mute video](#mute-video)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
 * [Sample](TODO) **TODO**
 
@@ -145,7 +146,7 @@ if let session = currentSession as? RTCVideoSession {
 }
 ```
 
-Actually it's just a shortcut for `setCapture(...)`. You may redefine device or format by yourself:
+Actually it's just a shortcut that changes a device in `setCapture(...)`. You may redefine the device or format by yourself:
 
 ```
 guard let currentDevice = session.captureDevice else {
@@ -166,3 +167,19 @@ You can mute/unmute audio by:
 ```
 session.isLocalAudioEnabled = false
 ```
+
+# Mute video
+
+Just stop session capture:
+
+```
+session.stopCapture()
+```
+
+You can turn on/off capture like this:
+
+```
+session.isCapturing ? session.stopCapture() : session.startCapture()
+```
+
+`session.startCapture` is shortcut for `setCapture(...)` used front camera with default format.
