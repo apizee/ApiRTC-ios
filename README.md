@@ -9,7 +9,7 @@ This tutorial describes how to use ApiRTC with examples from [Sample](TODO) **TO
 
 * [Main classes](#main-classes)
 * [First steps](#first-steps)
-    - [Create acount](#create-an-account-to-get-your-key)
+    - [Create acount](#create-an-account-to-get-your-api-key)
     - [Installation](#installation)
     - [Initialization](#initialization)
 * [Basic video call](#basic-video-call)
@@ -18,7 +18,7 @@ This tutorial describes how to use ApiRTC with examples from [Sample](TODO) **TO
 * [Mute audio](#mute-audio)
 * [Mute video](#mute-video)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
-* [Sample](TODO) **TODO**
+* Sample **TODO**
 
 ## Main classes
 
