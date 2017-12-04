@@ -179,6 +179,10 @@ session.isLocalAudioEnabled = false
 Just stop session capture:
 
 ```
+guard let session = currentSession as? RTCVideoSession else {
+    return
+}
+
 session.stopCapture()
 ```
 
