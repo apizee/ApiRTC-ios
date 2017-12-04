@@ -42,6 +42,12 @@ All code units are described in the [API Reference](http://docv2.apizee.com/sdk/
 ## Installation
 
 ```
+pod 'ApiRTC'
+```
+
+or
+
+```
 pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.2.0'
 ```
 
