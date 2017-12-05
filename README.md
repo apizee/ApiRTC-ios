@@ -5,7 +5,7 @@ ApiRTC cloud-based WebRTC API are built for web and mobile developers. Empower y
 [Apizee](https://apizee.com/) takes care of browser compatibility, security and NAT traversal issues for you.
 
 # Tutorial
-This tutorial describes how to use ApiRTC with examples from [Sample](TODO) **TODO**
+This tutorial describes how to use ApiRTC with examples from [Sample](https://github.com/apizee/ApiRTC-ios-sample) 
 
 * [Main classes](#main-classes)
 * [First steps](#first-steps)
@@ -18,7 +18,7 @@ This tutorial describes how to use ApiRTC with examples from [Sample](TODO) **TO
 * [Mute audio](#mute-audio)
 * [Mute video](#mute-video)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
-* Sample **TODO**
+* [Sample](https://github.com/apizee/ApiRTC-ios-sample)
 
 ## Main classes
 
@@ -32,6 +32,7 @@ All code units are described in the [API Reference](http://docv2.apizee.com/sdk/
 * Swift
 * iOS 9+
 * Xcode 9+
+* Bitcode is not supported at this moment
 
 # First steps
 
