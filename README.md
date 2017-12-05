@@ -18,7 +18,8 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 * [Mute audio](#mute-audio)
 * [Mute video](#mute-video)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
-* [Sample](https://github.com/apizee/ApiRTC-ios-sample)
+* [SDK GitHub](https://github.com/apizee/ApiRTC-ios)
+* [Sample GitHub](https://github.com/apizee/ApiRTC-ios-sample)
 
 ## Main classes
 
