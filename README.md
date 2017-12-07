@@ -199,11 +199,11 @@ session.isCapturing ? session.stopCapture() : session.startCapture()
 # Call in background mode
 If you switch app to the background during the call session will be closed by default.
 In order to prevent session interruption in the background, appropriate app capability should be enabled:
-Go to the **Target Settings** -> **Capabilities** -> Enable **Background Modes** -> Check **Audio, AirPlay, and Picture and Picture**
+Go to the **Target Settings** -> **Capabilities** -> Enable **Background Modes** -> Check **Audio, AirPlay, and Picture in Picture**.
 
-or
+OR
 
-put in your `Info.plist`
+Put in your `Info.plist`:
 
 ```
 <key>UIBackgroundModes</key>
