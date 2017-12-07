@@ -195,3 +195,19 @@ session.isCapturing ? session.stopCapture() : session.startCapture()
 ```
 
 `session.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
+
+# Call in background mode
+If you switch app to the background during the call session will be closed by default.
+In order to prevent session interruption in the background, appropriate app capability should be enabled:
+Go to the **Target Settings** -> **Capabilities** -> Enable **Background Modes** -> Check **Audio, AirPlay, and Picture and Picture**
+
+or
+
+put in your `Info.plist`
+
+```
+<key>UIBackgroundModes</key>
+<array>
+    <string>audio</string>
+</array>
+```
