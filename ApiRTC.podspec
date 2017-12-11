@@ -11,7 +11,7 @@ s.author      = { 'Aleksandr Khorobrykh' => 'aleksandr.khorobrykh@apizee.com', '
 
 s.ios.deployment_target = '9.0'
 
-s.source = { :git => 'https://github.com/apizee/ApiRTC-ios.git', :tag => '0.2.0' }
+s.source = { :git => 'https://github.com/apizee/ApiRTC-ios.git', :tag => '0.3.0' }
 
 s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 
