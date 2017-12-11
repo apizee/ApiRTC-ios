@@ -174,6 +174,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_feature(modules)
 @import WebRTC;
 @import CoreGraphics;
+@import UIKit;
 @import ObjectiveC;
 #endif
 
@@ -195,17 +196,20 @@ SWIFT_CLASS("_TtC6ApiRTC10CameraView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class RTCEAGLVideoView;
 
-
-@protocol RTCVideoViewShading;
-
-/// Ready view handling remote media stream
-SWIFT_CLASS("_TtC6ApiRTC15RemoteVideoView")
-@interface RemoteVideoView : RTCEAGLVideoView
-- (nonnull instancetype)initWithFrame:(CGRect)frame shader:(id <RTCVideoViewShading> _Nonnull)shader OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder shader:(id <RTCVideoViewShading> _Nonnull)shader OBJC_DESIGNATED_INITIALIZER;
+/// Ready view handling video stream
+SWIFT_CLASS("_TtC6ApiRTC13EAGLVideoView")
+@interface EAGLVideoView : UIView <RTCEAGLVideoViewDelegate>
+/// only .scaleAspectFit & scaleAspectFill have an effect
+@property (nonatomic) UIViewContentMode contentMode;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (void)videoView:(RTCEAGLVideoView * _Nonnull)videoView didChangeVideoSize:(CGSize)size;
+- (void)layoutSubviews;
 @end
+
+
 
 SWIFT_MODULE_NAMESPACE_POP
 #pragma clang diagnostic pop

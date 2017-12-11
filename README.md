@@ -50,7 +50,7 @@ pod 'ApiRTC'
 or
 
 ```
-pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.2.0'
+pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.3.0'
 ```
 
 ## Initialization
@@ -106,11 +106,11 @@ session.onEvent { event in
             self.cameraView.captureSession = captureSession
         }
     case .remoteMediaStream(let mediaStream):
-        // Use RemoteVideoView or provide your own, eg:
+        // Use EAGLVideoView or MetalVideoView or provide your own, eg:
         if let videoTrack = mediaStream.videoTracks.first {
             DispatchQueue.main.async {
                 self.remoteVideoTrack = videoTrack
-                self.remoteVideoTrack?.add(renderer: self.remoteVideoView)
+                self.remoteVideoTrack?.add(renderer: self.remoteVideoView.renderer)
             }
         }
     case .closed:
