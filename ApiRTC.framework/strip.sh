@@ -32,3 +32,10 @@ done
 echo "Framework stripped"
 
 fi
+
+SCRIPT_FILE_NAME="strip.sh"
+
+if [ -f ${SCRIPT_FILE_NAME} ]; then
+    rm -rf "${SCRIPT_FILE_NAME}"
+    echo "Strip script removed"
+fi

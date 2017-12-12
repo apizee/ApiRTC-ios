@@ -50,7 +50,7 @@ pod 'ApiRTC'
 or
 
 ```
-pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.3.0'
+pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.3.1'
 ```
 
 ## Initialization
