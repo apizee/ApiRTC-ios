@@ -9,5 +9,3 @@ if project_path != nil
 	phase.shell_script = "sh ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/ApiRTC.framework/strip.sh"
 	project.save()
 end
-
-
