@@ -21,8 +21,6 @@ s.dependency 'GoogleWebRTC', '1.1.20913'
 s.vendored_frameworks = 'ApiRTC.framework'
 
 s.preserve_paths = '*'
-s.prepare_command = <<-CMD
-     sh prepare.sh
-  CMD
+s.prepare_command = 'sh prepare.sh'
 
 end
