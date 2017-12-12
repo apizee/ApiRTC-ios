@@ -20,6 +20,8 @@ s.dependency 'GoogleWebRTC', '1.1.20913'
 
 s.vendored_frameworks = 'ApiRTC.framework'
 
-s.prepare_command = 'ruby prepare.rb'
+s.prepare_command = <<-CMD
+     sh prepare.sh
+  CMD
 
 end

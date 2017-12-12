@@ -1,8 +1,13 @@
 require 'xcodeproj'
-project_dir = File.expand_path("../..", Dir.pwd)
-project_path = Dir.glob("#{project_dir}/*.xcodeproj").first.to_s
-project = Xcodeproj::Project.open(project_path)
-main_target = project.targets.first
-phase = main_target.new_shell_script_build_phase("Strip framework")
-phase.shell_script = "sh ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/ApiRTC.framework/strip.sh"
-project.save()
+
+project_path = ARGV[0]
+
+if project_path != nil 
+	project = Xcodeproj::Project.open(project_path)
+	main_target = project.targets.first
+	phase = main_target.new_shell_script_build_phase("Strip framework")
+	phase.shell_script = "sh ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/ApiRTC.framework/strip.sh"
+	project.save()
+end
+
+
