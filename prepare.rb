@@ -1,6 +1,6 @@
 require 'xcodeproj'
 project_dir = File.expand_path("../..", Dir.pwd)
-project_path = Dir.glob("#{project_dir}/*.xcodeproj").first
+project_path = Dir.glob("#{project_dir}/*.xcodeproj").first.to_s
 project = Xcodeproj::Project.open(project_path)
 main_target = project.targets.first
 phase = main_target.new_shell_script_build_phase("Strip framework")
