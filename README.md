@@ -20,6 +20,7 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
 * [SDK GitHub](https://github.com/apizee/ApiRTC-ios)
 * [Sample GitHub](https://github.com/apizee/ApiRTC-ios-sample)
+* [AppStore](#appstore)
 
 ## Main classes
 
@@ -211,3 +212,8 @@ Put in your `Info.plist`:
     <string>audio</string>
 </array>
 ```
+
+# AppStore
+
+If you're publishing your app to the AppStore you may need to remove unused architectures from the framework. 
+Go to the **Build Phases** -> Add **New Run Script Phase** -> Insert content of Utils/strip-architecture.sh
