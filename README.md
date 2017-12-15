@@ -25,13 +25,14 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 ## Main classes
 
 * **ApiRTC**: Main endpoint
-* **RTCSession**: Main class of all WebRTC session types
+* **Session**: Provides current SDK session functionality
+* **Call**: Provides peer-to-peer audio/video calls
 
 All code units are described in the [API Reference](http://docv2.apizee.com/sdk/ios/index.html)
 
 ## Requirements
 
-* Swift
+* Swift 4
 * iOS 9+
 * Xcode 9+
 * Bitcode is not supported at this moment
@@ -51,7 +52,7 @@ pod 'ApiRTC'
 or
 
 ```
-pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.3.1'
+pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.4.0'
 ```
 
 ## Initialization
@@ -63,40 +64,40 @@ Initialize framework with `your_api_key`:
 ApiRTC.initialize(apiKey: "your_api_key")
 ```
 
-You should attach handlers for SDK events:
+You should attach handlers for current session events:
 
 ```
-ApiRTC.onEvent { event in
+ApiRTC.session.onEvent { event in
     switch event {
     case .connected:
         ...
-    case .incomingSession(let session): // RTCSession
-        // Provide incoming sessions handler, eg:
-        self.currentSession = session
+    case .incomingCall(let call): 
+        // Provide incoming call handler, eg:
+        self.currentCall = call
     case .error(let error):
         ...
     }
 }
 
 ```
-Connect:
+Connect current session:
 
 ```
-ApiRTC.connect() // `Event.connected` should be fired
+ApiRTC.session.connect() // `SessionEvent.connected` will be fired
 ```
 
 # Basic video call
 
-Create video call session:
+Create video call:
 
 ```
-session = ApiRTC.createSession(type: .videoCall, destinationId: "some_number")
+call = ApiRTC.createCall(type: .video, destinationId: "some_number")
 ```
 
-For each session events handler should be attached:
+For each call events handler should be attached:
 
 ```
-session.onEvent { event in
+call.onEvent { event in
     switch event {
     case .call:
         ...
@@ -125,7 +126,7 @@ session.onEvent { event in
 Call:
 
 ```
-session.start()
+call.start()
 ```
 
 # Video formats
@@ -141,7 +142,7 @@ if let device = ApiRTC.getCaptureDevice(position: .front) {
     
     let format = ...
     
-    session.setCapture(with: device, format: format)
+    call.setCapture(with: device, format: format)
 }
 ```
 
@@ -150,22 +151,22 @@ if let device = ApiRTC.getCaptureDevice(position: .front) {
 You can switch camera easily:
 
 ```
-if let session = currentSession as? RTCVideoSession {
-    session.switchCamera()
+if let call = currentCall as? VideoCall {
+    call.switchCamera()
 }
 ```
 
 Actually it's just a shortcut that changes a device in `setCapture(...)`. You may redefine the device or format by yourself:
 
 ```
-guard let currentDevice = session.captureDevice else {
+guard let currentDevice = call.captureDevice else {
     return
 }
 
 let switchedPosition: AVCaptureDevice.Position = currentDevice.position == .front ? .back : .front
 
 if let device = ApiRTC.getCaptureDevice(position: switchedPosition) {
-    session.setCapture(with: device) // you may also define format here
+    call.setCapture(with: device) // you may also define format here
 }
 ```
 
@@ -174,7 +175,7 @@ if let device = ApiRTC.getCaptureDevice(position: switchedPosition) {
 You can mute/unmute audio by:
 
 ```
-session.isLocalAudioEnabled = false
+call.isLocalAudioEnabled = false
 ```
 
 # Mute video
@@ -182,20 +183,20 @@ session.isLocalAudioEnabled = false
 Just stop session capture:
 
 ```
-guard let session = currentSession as? RTCVideoSession else {
+guard let call = currentCall as? VideoCall else {
     return
 }
 
-session.stopCapture()
+call.stopCapture()
 ```
 
 You can turn on/off capture like this:
 
 ```
-session.isCapturing ? session.stopCapture() : session.startCapture()
+call.isCapturing ? call.stopCapture() : call.startCapture()
 ```
 
-`session.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
+`call.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
 
 # Call in background mode
 If you switch app to the background during the call session will be closed by default.
