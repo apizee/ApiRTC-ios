@@ -17,6 +17,9 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 * [Switching camera](#switching-camera)
 * [Mute audio](#mute-audio)
 * [Mute video](#mute-video)
+* [Custom user data](#custom-user-data)
+* [Connected contacts list](#connected-contacts-list)
+* [Presence groups](#presence-groups)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
 * [SDK GitHub](https://github.com/apizee/ApiRTC-ios)
 * [Sample GitHub](https://github.com/apizee/ApiRTC-ios-sample)
@@ -213,6 +216,15 @@ Put in your `Info.plist`:
     <string>audio</string>
 </array>
 ```
+
+# Custom user data
+**TODO**
+
+# Connected contacts list
+**TODO**
+
+# Presence groups
+**TODO**
 
 # AppStore
 
