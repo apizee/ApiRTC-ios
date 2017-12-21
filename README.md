@@ -222,9 +222,10 @@ Put in your `Info.plist`:
 
 # Presence groups
 
-Presence groups allow you to exchange actual information about the current status between contacts.
+Presence groups allow you to exchange actual information about the current status between the contacts.
 
 User can have *joined / only subscribed / joined & subscribed* status realted to participation in a group:
+
 * **joined**: user doesn't receive events from this group, other group's users receive events from this user (user is visible for others)
 * **only subscribed**: user receive events from this group, other group's users don't receive events from this user (user is not visible for others)
 * **joined & subscribed**: user receive events from this group, other group's users receive events from this user (user is visible for others)
