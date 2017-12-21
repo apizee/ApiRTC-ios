@@ -17,9 +17,10 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 * [Switching camera](#switching-camera)
 * [Mute audio](#mute-audio)
 * [Mute video](#mute-video)
-* [Custom user data](#custom-user-data)
-* [Connected contacts list](#connected-contacts-list)
 * [Presence groups](#presence-groups)
+    - [Manage presence groups](#manage-presence-groups)
+    - [Handle presence group events](#handle-presence-group-events)
+* [Custom user data](#custom-user-data)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
 * [SDK GitHub](https://github.com/apizee/ApiRTC-ios)
 * [Sample GitHub](https://github.com/apizee/ApiRTC-ios-sample)
@@ -202,6 +203,7 @@ call.isCapturing ? call.stopCapture() : call.startCapture()
 `call.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
 
 # Call in background mode
+
 If you switch app to the background during the call session will be closed by default.
 In order to prevent session interruption in the background, appropriate app capability should be enabled:
 Go to the **Target Settings** -> **Capabilities** -> Enable **Background Modes** -> Check **Audio, AirPlay, and Picture in Picture**.
@@ -217,14 +219,99 @@ Put in your `Info.plist`:
 </array>
 ```
 
-# Custom user data
-**TODO**
-
-# Connected contacts list
-**TODO**
 
 # Presence groups
-**TODO**
+
+Presence groups allow you to exchange actual information about the current status between contacts.
+
+User can have *joined / only subscribed / joined & subscribed* status realted to participation in a group:
+* **joined**: user doesn't receive events from this group, other group's users receive events from this user (user is visible for others)
+* **only subscribed**: user receive events from this group, other group's users don't receive events from this user (user is not visible for others)
+* **joined & subscribed**: user receive events from this group, other group's users receive events from this user (user is visible for others)
+
+## Manage presence groups
+
+Each user included in `default` presence group by default.
+
+You can redefine this behavior:
+
+on initialize:
+
+```
+ApiRTC.initialize(..., presenceGroups: ["customGroup1", "customGroup2"], subscribeToPresenceGroups: ["customGroup1"], ...)
+```
+
+after initialize:
+
+```
+ApiRTC.session.joinGroup("someGroup")
+ApiRTC.session.leaveGroup("someGroup")
+ApiRTC.session.subscribeGroup("someGroup")
+ApiRTC.session.unsubscribeGroup("someGroup")
+
+```
+
+You can get actual presence groups information to check group states, contacts etc:
+
+```
+if let group = ApiRTC.session.presenceGroups["someGroup"] {
+    let contacts = group.contacts
+    ...
+}
+```
+
+## Handle presence group events
+
+When any group that you are subscribed to is updated, `Session` will receive `contactListUpdated` event that may be handled like this:
+
+```
+ApiRTC.session.onEvent { (event) in
+    switch event {
+    ...
+    case .contactListUpdated(let presenceGroup, let diff):
+
+        switch diff.type {
+        case .join:
+            let joinedContacts = diff.contacts
+            ...
+        }
+    }
+}
+```
+
+# Custom user data
+
+`User` object has `data` property that may contain custom user data.
+You can manage it:
+
+on initialize:
+
+```
+ApiRTC.initialize(..., userData: ["key": "value"])
+```
+
+after initialize:
+
+```
+ApiRTC.session.setUserData(["key": "value"])
+```
+
+It will update current user data locally and on the server. Users who are subscribed to the appropriate groups will be notified about changes with `contactListUpdated` event: 
+
+```
+ApiRTC.session.onEvent { (event) in
+    switch event {
+    ...
+    case .contactListUpdated(let presenceGroup, let diff):
+
+        switch diff.type {
+        case .userDataChange:
+            let changedContacts = diff.contacts
+            ...
+        }
+    }
+}
+```
 
 # AppStore
 
