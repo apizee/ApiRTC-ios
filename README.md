@@ -262,17 +262,17 @@ if let group = ApiRTC.session.presenceGroups["someGroup"] {
 
 ## Handle presence group events
 
-When any group that you are subscribed to is updated, `Session` will receive `contactListUpdated` event that may be handled like this:
+When any group that you are subscribed to is updated, `Session` will receive `contactListUpdated` event contained updated `PresenceGroup` and `PresenceGroupUpdate` object separately contained a new data. It may be handled like this:
 
 ```
 ApiRTC.session.onEvent { (event) in
     switch event {
     ...
-    case .contactListUpdated(let presenceGroup, let diff):
+    case .contactListUpdated(let presenceGroup, let groupUpdate):
 
-        switch diff.type {
+        switch groupUpdate.type {
         case .join:
-            let joinedContacts = diff.contacts
+            let joinedContacts = groupUpdate.contacts
             ...
         }
     }
@@ -302,11 +302,11 @@ It will update current user data locally and on the server. Users who are subscr
 ApiRTC.session.onEvent { (event) in
     switch event {
     ...
-    case .contactListUpdated(let presenceGroup, let diff):
+    case .contactListUpdated(let presenceGroup, let groupUpdate):
 
-        switch diff.type {
+        switch groupUpdate.type {
         case .userDataChange:
-            let changedContacts = diff.contacts
+            let changedContacts = groupUpdate.contacts
             ...
         }
     }
