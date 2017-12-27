@@ -263,7 +263,7 @@ if let group = ApiRTC.session.presenceGroups["someGroup"] {
 
 ## Handle presence group events
 
-When any group that you are subscribed to is updated, `Session` will receive `contactListUpdated` event contained updated `PresenceGroup` and `PresenceGroupUpdate` object separately contained a new data. It may be handled like this:
+When any group that you are subscribed to is updated, `Session` will receive `contactListUpdated` event contained updated `PresenceGroup` and `PresenceGroupUpdate` object that separately contains a new data. It may be handled like this:
 
 ```
 ApiRTC.session.onEvent { (event) in
