@@ -222,12 +222,12 @@ Put in your `Info.plist`:
 
 # Presence groups
 
-Presence groups allow you to exchange actual information about the current status between the contacts.
+Presence groups allow you to exchange an actual information about the current status between the contacts.
 
-User can have *joined / only subscribed / joined & subscribed* status realted to participation in a group:
+User can have *joined / subscribed / joined & subscribed* status related to participation in the group:
 
 * **joined**: user doesn't receive events from this group, other group's users receive events from this user (user is visible for others)
-* **only subscribed**: user receive events from this group, other group's users don't receive events from this user (user is not visible for others)
+* **subscribed**: user receive events from this group, other group's users don't receive events from this user (user is not visible for others)
 * **joined & subscribed**: user receive events from this group, other group's users receive events from this user (user is visible for others)
 
 ## Manage presence groups
@@ -236,13 +236,13 @@ Each user included in `default` presence group by default.
 
 You can redefine this behavior:
 
-on initialize:
+at initialization:
 
 ```
 ApiRTC.initialize(..., presenceGroups: ["customGroup1", "customGroup2"], subscribeToPresenceGroups: ["customGroup1"], ...)
 ```
 
-after initialize:
+after initialization:
 
 ```
 ApiRTC.session.joinGroup("someGroup")
@@ -252,7 +252,7 @@ ApiRTC.session.unsubscribeGroup("someGroup")
 
 ```
 
-You can get actual presence groups information to check group states, contacts etc:
+You can get an actual presence group's information in order to check group states, active contacts etc:
 
 ```
 if let group = ApiRTC.session.presenceGroups["someGroup"] {
@@ -263,7 +263,7 @@ if let group = ApiRTC.session.presenceGroups["someGroup"] {
 
 ## Handle presence group events
 
-When any group that you are subscribed to is updated, `Session` will receive `contactListUpdated` event contained updated `PresenceGroup` and `PresenceGroupUpdate` object that separately contains a new data. It may be handled like this:
+When any group you are subscribed to is updated, `Session` will receive `contactListUpdated` event contained updated `PresenceGroup` and `PresenceGroupUpdate` object that separately contains useful updated data. It may be handled like this:
 
 ```
 ApiRTC.session.onEvent { (event) in
@@ -285,19 +285,19 @@ ApiRTC.session.onEvent { (event) in
 `User` object has `data` property that may contain custom user data.
 You can manage it:
 
-on initialize:
+at initialization:
 
 ```
 ApiRTC.initialize(..., userData: ["key": "value"])
 ```
 
-after initialize:
+after initialization:
 
 ```
 ApiRTC.session.setUserData(["key": "value"])
 ```
 
-It will update current user data locally and on the server. Users who are subscribed to the appropriate groups will be notified about changes with `contactListUpdated` event: 
+It will update the current user data locally and also on the server. Users who are subscribed to the appropriate groups will be notified about these changes with `contactListUpdated` event: 
 
 ```
 ApiRTC.session.onEvent { (event) in
