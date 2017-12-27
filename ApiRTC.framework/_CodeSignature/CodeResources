@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/ApiRTC-Swift.h</key>
 		<data>
-		gC6aEGZgTX0jyclhi8uroxgatEU=
+		DukUg+e5zX5KwIDhXs8R65/5ncc=
 		</data>
 		<key>Headers/ApiRTC.h</key>
 		<data>
@@ -14,23 +14,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		9YJz8KApBLVv41Fk2NNBBsP3mZs=
+		zlR5UBFUKzetFjzkz5c6MTM8TIY=
 		</data>
 		<key>Modules/ApiRTC.swiftmodule/arm.swiftdoc</key>
 		<data>
-		FgvaR0TVKX8jEWYj2XMQkl1q2WY=
+		hARC8V7iYEM7t2riFwWBK+VQfos=
 		</data>
 		<key>Modules/ApiRTC.swiftmodule/arm.swiftmodule</key>
 		<data>
-		3POBH0x7EPPCUDLWNUXrTnt7DxM=
+		j3HRnKLgCG0/CMEBHjSQ6rzkdmE=
 		</data>
 		<key>Modules/ApiRTC.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		3oEQWCgCDgiT5j+TPanfPGCMMUY=
+		qRwD9ryV4mB2dZcfSZ6qeDU4g0U=
 		</data>
 		<key>Modules/ApiRTC.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		GDYVeeRSbSDbXq6w0lFLgbe878I=
+		o+SBF04RV9YSllyqMbXYOHPxTm8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gC6aEGZgTX0jyclhi8uroxgatEU=
+			DukUg+e5zX5KwIDhXs8R65/5ncc=
 			</data>
 			<key>hash2</key>
 			<data>
-			EE0UOV6DL9HiHQJ4Gy9K7WsZnPxq/KzGzoebZqatVOs=
+			fFwapSTtWc07S7YXGSp00XN+ecxs8ClDsE7YN521G0U=
 			</data>
 		</dict>
 		<key>Headers/ApiRTC.h</key>
@@ -65,44 +65,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FgvaR0TVKX8jEWYj2XMQkl1q2WY=
+			hARC8V7iYEM7t2riFwWBK+VQfos=
 			</data>
 			<key>hash2</key>
 			<data>
-			0amW5wehpDTm8xYZPWD7eslESX2Fmx6PWYV8wsQhdBM=
+			2eZp9WRlc1melWxJ+qZyITLTYAOABajrbX7bBqUOMc0=
 			</data>
 		</dict>
 		<key>Modules/ApiRTC.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3POBH0x7EPPCUDLWNUXrTnt7DxM=
+			j3HRnKLgCG0/CMEBHjSQ6rzkdmE=
 			</data>
 			<key>hash2</key>
 			<data>
-			T54pOEUMIWPdXIMOZmI8a9ppQnVVT4GNrDJVAgtmESQ=
+			UIiBkyeP0yuFdnBUddo1k2lG0lbIbUBsVz9U5rV4IfY=
 			</data>
 		</dict>
 		<key>Modules/ApiRTC.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3oEQWCgCDgiT5j+TPanfPGCMMUY=
+			qRwD9ryV4mB2dZcfSZ6qeDU4g0U=
 			</data>
 			<key>hash2</key>
 			<data>
-			k3itBs7soezAVh+4vu0i3OiFNhRt2FVo8vipxzoWcJk=
+			WZUGSLAdSOpBCEKeZ85bC81qfu+GoRVLGJZ8OaVzP0k=
 			</data>
 		</dict>
 		<key>Modules/ApiRTC.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GDYVeeRSbSDbXq6w0lFLgbe878I=
+			o+SBF04RV9YSllyqMbXYOHPxTm8=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZREbvOKXmjQYk7TVxSBdMSsYAFZVythhRPM+lHR73cA=
+			+nN+SroAcy4LblVntGT22x287cKNAvplI3z4gUKllR0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

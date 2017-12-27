@@ -172,10 +172,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_DEPRECATED_OBJC(Msg) SWIFT_DEPRECATED_MSG(Msg)
 #endif
 #if __has_feature(modules)
+@import ObjectiveC;
 @import WebRTC;
 @import CoreGraphics;
 @import UIKit;
-@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -187,6 +187,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wnullability"
 
 SWIFT_MODULE_NAMESPACE_PUSH("ApiRTC")
+
+/// Main SDK class
+SWIFT_CLASS("_TtC6ApiRTC6ApiRTC")
+@interface ApiRTC : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+
+
 @class NSCoder;
 
 /// Ready view handling local capture
@@ -207,6 +216,14 @@ SWIFT_CLASS("_TtC6ApiRTC13EAGLVideoView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)videoView:(RTCEAGLVideoView * _Nonnull)videoView didChangeVideoSize:(CGSize)size;
 - (void)layoutSubviews;
+@end
+
+
+/// Ready view handling video stream (uses Metal)
+SWIFT_CLASS("_TtC6ApiRTC14MetalVideoView")
+@interface MetalVideoView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
