@@ -202,6 +202,12 @@ call.isCapturing ? call.stopCapture() : call.startCapture()
 
 `call.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
 
+# Take snapshot
+
+You can take a snapshot from the remote video view during the call:
+
+`let snapshotImage = remoteVideoView.takeSnapshot()`
+
 # Call in background mode
 
 If you switch app to the background during the call session will be closed by default.
