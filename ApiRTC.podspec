@@ -15,7 +15,7 @@ s.source = { :git => 'https://github.com/apizee/ApiRTC-ios.git', :tag => '0.4.0'
 
 s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 
-s.dependency 'Socket.IO-Client-Swift', '13.1.0'
+s.dependency 'Socket.IO-Client-Swift', '13.1.1'
 s.dependency 'GoogleWebRTC', '1.1.20913'
 
 s.vendored_frameworks = 'ApiRTC.framework'

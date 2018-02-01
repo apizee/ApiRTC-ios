@@ -2,7 +2,6 @@
 //  ApiRTC.h
 //  ApiRTC
 //
-//  Created by Aleksandr Khorobrykh on 30/10/2017.
 //  Copyright © 2017 Apizee. All rights reserved.
 //
 

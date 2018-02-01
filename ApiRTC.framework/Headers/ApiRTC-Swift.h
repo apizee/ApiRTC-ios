@@ -205,13 +205,21 @@ SWIFT_CLASS("_TtC6ApiRTC10CameraView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+SWIFT_CLASS("_TtC6ApiRTC9VideoView")
+@interface VideoView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class RTCEAGLVideoView;
 
 /// Ready view handling video stream
 SWIFT_CLASS("_TtC6ApiRTC13EAGLVideoView")
-@interface EAGLVideoView : UIView <RTCEAGLVideoViewDelegate>
+@interface EAGLVideoView : VideoView <RTCEAGLVideoViewDelegate>
 /// only .scaleAspectFit & scaleAspectFill have an effect
 @property (nonatomic) UIViewContentMode contentMode;
+@property (nonatomic) CGRect frame;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)videoView:(RTCEAGLVideoView * _Nonnull)videoView didChangeVideoSize:(CGSize)size;
@@ -221,12 +229,32 @@ SWIFT_CLASS("_TtC6ApiRTC13EAGLVideoView")
 
 /// Ready view handling video stream (uses Metal)
 SWIFT_CLASS("_TtC6ApiRTC14MetalVideoView")
-@interface MetalVideoView : UIView
+@interface MetalVideoView : VideoView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
+
+
+
+
+
+
+@class UITouch;
+@class UIEvent;
+
+SWIFT_CLASS("_TtC6ApiRTC14WhiteboardView")
+@interface WhiteboardView : UIImageView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (void)touchesBegan:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
+- (void)touchesMoved:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
+- (void)touchesEnded:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
+- (void)touchesCancelled:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
+- (nonnull instancetype)initWithImage:(UIImage * _Nullable)image SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithImage:(UIImage * _Nullable)image highlightedImage:(UIImage * _Nullable)highlightedImage SWIFT_UNAVAILABLE;
+@end
 
 SWIFT_MODULE_NAMESPACE_POP
 #pragma clang diagnostic pop
