@@ -17,14 +17,19 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 * [Switching camera](#switching-camera)
 * [Mute audio](#mute-audio)
 * [Mute video](#mute-video)
+* [Call in background mode](#call-in-background-mode)
+* [Video view](#video-view)
+    - [Take snapshot](#take-snapshot)
 * [Presence groups](#presence-groups)
     - [Manage presence groups](#manage-presence-groups)
     - [Handle presence group events](#handle-presence-group-events)
 * [Custom user data](#custom-user-data)
+* [Rooms](#rooms)
+* [Whiteboard](#whiteboard)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
 * [SDK GitHub](https://github.com/apizee/ApiRTC-ios)
 * [Sample GitHub](https://github.com/apizee/ApiRTC-ios-sample)
-* [AppStore](#appstore)
+* [AppStore publishing](#appstore-publishing)
 
 ## Main classes
 
@@ -202,12 +207,6 @@ call.isCapturing ? call.stopCapture() : call.startCapture()
 
 `call.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
 
-# Take snapshot
-
-You can take a snapshot from the remote video view during the call:
-
-`let snapshotImage = remoteVideoView.takeSnapshot()`
-
 # Call in background mode
 
 If you switch app to the background during the call session will be closed by default.
@@ -225,6 +224,19 @@ Put in your `Info.plist`:
 </array>
 ```
 
+# Video view
+
+`EAGLVideoView` has some extended features:
+
+`view.contentMode = .scaleAspectToFit ` work as usual.
+
+`view.contentMode = .scaleAspectToFill` resizes and aligns video to optimally show the central area.
+
+## Take snapshot
+
+You can take a snapshot from the remote video view during the call:
+
+`let snapshotImage = remoteVideoView.takeSnapshot()`
 
 # Presence groups
 
@@ -302,8 +314,8 @@ after initialization:
 ```
 ApiRTC.session.setUserData(["key": "value"])
 ```
-
 It will update the current user data locally and also on the server. Users who are subscribed to the appropriate groups will be notified about these changes with `contactListUpdated` event: 
+
 
 ```
 ApiRTC.session.onEvent { (event) in
@@ -320,7 +332,64 @@ ApiRTC.session.onEvent { (event) in
 }
 ```
 
-# AppStore
+# Rooms
+
+`Room` is one of the core objects that provides the interaction in rooms (groups) and helps to be informed about current room contacts state (e.g. this is used in the Whiteboard):
+
+```
+room.onEvent { event in
+
+    switch event {
+    case .updated(let roomUpdate):
+        switch roomUpdate.type {
+        case .join:
+            ....
+            let joinedContacts = roomUpdate.contacts
+    }
+}
+```
+
+
+# Whiteboard
+
+Start new whiteboard:
+
+```
+ApiRTC.session.startNewWhiteboard()
+```
+
+You will receive `SessionEvent.newWhiteboard(Whiteboard)` event when it will be created:
+
+```
+ApiRTC.session.onEvent { (event) in
+    switch event {
+    ...
+    case .newWhiteboard(let whiteboard):
+        ...
+    default:
+        break
+    }
+}
+```
+
+You can join, invite contact and leave the whiteboard using appropriate `Whiteboard` object methods. Invited contacts will also receive `newWhiteboard(...)` event.
+
+There is `WhiteboardView` object in order to represent the whiteboard in the view's hierarchy. After adding this view it should be attached to active whiteboard:
+
+`whiteboard.setView(whiteboardView)`
+
+You can use such properties as `tool`, `color`, `brushSize` etc to operate with whiteboard:
+
+```
+whiteboard.tool = .pen
+whiteboard.color = .red
+whiteboard.brushSize = 3
+```
+
+You can be notified about whiteboard user activity by subscribing to `whiteboard.room` events. See [Rooms](#rooms) section.
+
+
+# AppStore publishing
 
 If you're publishing your app to the AppStore you may need to remove unused architectures from the framework. 
 Go to the **Build Phases** -> Add **New Run Script Phase** -> Insert content of *Utils/strip-architecture.sh*
