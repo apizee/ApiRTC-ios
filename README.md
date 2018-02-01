@@ -228,15 +228,17 @@ Put in your `Info.plist`:
 
 `EAGLVideoView` has some extended features:
 
-`view.contentMode = .scaleAspectToFit ` work as usual.
+`view.contentMode = .scaleAspectFit ` work as usual.
 
-`view.contentMode = .scaleAspectToFill` resizes and aligns video to optimally show the central area.
+`view.contentMode = .scaleAspectFill` resizes and aligns video to optimally show the central area of video.
 
 ## Take snapshot
 
 You can take a snapshot from the remote video view during the call:
 
 `let snapshotImage = remoteVideoView.takeSnapshot()`
+
+You can use put `CGRect` to this method to take only desired area.
 
 # Presence groups
 
@@ -358,7 +360,7 @@ Start new whiteboard:
 ApiRTC.session.startNewWhiteboard()
 ```
 
-You will receive `SessionEvent.newWhiteboard(Whiteboard)` event when it will be created:
+You will receive `SessionEvent.newWhiteboard(Whiteboard)` event when a new whiteboard is created or you are invited:
 
 ```
 ApiRTC.session.onEvent { (event) in
@@ -372,9 +374,9 @@ ApiRTC.session.onEvent { (event) in
 }
 ```
 
-You can join, invite contact and leave the whiteboard using appropriate `Whiteboard` object methods. Invited contacts will also receive `newWhiteboard(...)` event.
+You can join, invite contact and leave the whiteboard using appropriate `Whiteboard` object methods. 
 
-There is `WhiteboardView` object in order to represent the whiteboard in the view's hierarchy. After adding this view it should be attached to active whiteboard:
+There is `WhiteboardView` object in order to represent the whiteboard in the view's hierarchy. After adding this view it should be attached to current whiteboard:
 
 `whiteboard.setView(whiteboardView)`
 
