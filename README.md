@@ -354,7 +354,7 @@ room.onEvent { event in
 
 # Whiteboard
 
-Start new whiteboard:
+Start a new whiteboard:
 
 ```
 ApiRTC.session.startNewWhiteboard()
