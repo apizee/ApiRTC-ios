@@ -25,6 +25,7 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
     - [Handle presence group events](#handle-presence-group-events)
 * [Custom user data](#custom-user-data)
 * [Rooms](#rooms)
+* [Conference](#conference)
 * [Whiteboard](#whiteboard)
 * [API references](http://docv2.apizee.com/sdk/ios/index.html)
 * [SDK GitHub](https://github.com/apizee/ApiRTC-ios)
@@ -336,7 +337,7 @@ ApiRTC.session.onEvent { (event) in
 
 # Rooms
 
-`Room` is one of the core objects that provides the interaction in rooms (groups) and helps to be informed about current room contacts state (e.g. this is used in the Whiteboard):
+`Room` is one of the core objects that provides the interaction between users in rooms (groups) and helps to be informed about current room users state (e.g. this is used in the Whiteboard):
 
 ```
 room.onEvent { event in
@@ -351,8 +352,67 @@ room.onEvent { event in
 }
 ```
 
+# Conference
+
+ApiRTC allows you to make a calls in conference mode.
+
+To start a new conference or join existing one:
+
+```
+let conference = Conference(id: "conference_id")
+conference.start()
+```
+
+or 
+
+```
+conference.join()
+```
+
+Now you can receive and handle `conference` events:
+
+```
+conference.onEvent { event in
+    switch event {
+    case .newRemoteStream(let stream): 
+        ...
+    }
+    ...
+}
+```
+
+You can publish your media to this conference:
+
+```
+conference.publish(mediaType)
+```
+
+If you are publishing the video media type you will receive `localCaptureSession(AVCaptureSession)` conference event.
+
+`Conference.streams` variable has actual information about available streams represented by array of `ConferenceStream` objects.
+
+You can subscribe to any available stream to obtain the media:
+
+```
+conference.subscribeToStream(withId: streamId, mediaType: .video)
+```
+
+After a successful subscription you should receive `remoteMediaStream(MediaStream)` event.
+
+You can use such conference events as `newRemoteStream(ConferenceStream)` and `removedStreamWithId(String)` to be informed about streams state.
+
+You can leave conference by:
+
+```
+conference.leave()
+```
+
+It will stop local and remote streams handling. Be careful when you attach `MediaStream` object to any other object and clean this connection before leaving conference how it is done in the conference sample.
+
 
 # Whiteboard
+
+ApiRTC has built-in functionality to run the whiteboard.
 
 Start a new whiteboard:
 
@@ -374,9 +434,9 @@ ApiRTC.session.onEvent { (event) in
 }
 ```
 
-You can join, invite contact and leave the whiteboard using appropriate `Whiteboard` object methods. 
+You can join, invite contact or leave the whiteboard using appropriate `Whiteboard` object methods. 
 
-There is `WhiteboardView` object in order to represent the whiteboard in the view's hierarchy. After adding this view it should be attached to current whiteboard:
+There is `WhiteboardView` object in order to represent the whiteboard in the view's hierarchy. After adding this view it should be attached to the current whiteboard:
 
 `whiteboard.setView(whiteboardView)`
 
@@ -388,7 +448,7 @@ whiteboard.color = .red
 whiteboard.brushSize = 3
 ```
 
-You can be notified about whiteboard user activity by subscribing to `whiteboard.room` events. See [Rooms](#rooms) section.
+You can be notified about whiteboard's room user activity by subscribing to `whiteboard.room` events. See [Rooms](#rooms) section.
 
 
 # AppStore publishing
