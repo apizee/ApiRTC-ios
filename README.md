@@ -354,22 +354,22 @@ room.onEvent { event in
 
 # Conference
 
-ApiRTC allows you to make a calls in conference mode.
+ApiRTC allows you to make a calls in the conference mode.
 
-To start a new conference or join existing one:
+To start a new conference:
 
 ```
 let conference = Conference(id: "conference_id")
 conference.start()
 ```
 
-or 
+or join existing one:
 
 ```
 conference.join()
 ```
 
-Now you can receive and handle `conference` events:
+Now you can receive and handle conference events:
 
 ```
 conference.onEvent { event in
@@ -384,20 +384,20 @@ conference.onEvent { event in
 You can publish your media to this conference:
 
 ```
-conference.publish(mediaType)
+conference.publish(.video)
 ```
 
-If you are publishing the video media type you will receive `localCaptureSession(AVCaptureSession)` conference event.
+If you are publishing the media of video type you will receive `localCaptureSession(AVCaptureSession)` conference event.
 
 `Conference.streams` variable has actual information about available streams represented by array of `ConferenceStream` objects.
 
-You can subscribe to any available stream to obtain the media:
+You can subscribe to any available stream to obtain appropriate media:
 
 ```
 conference.subscribeToStream(withId: streamId, mediaType: .video)
 ```
 
-After a successful subscription you should receive `remoteMediaStream(MediaStream)` event.
+After a successful subscription you should receive `remoteMediaStream(MediaStream)` conference event.
 
 You can use such conference events as `newRemoteStream(ConferenceStream)` and `removedStreamWithId(String)` to be informed about streams state.
 
