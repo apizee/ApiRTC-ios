@@ -17,6 +17,7 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 * [Switching camera](#switching-camera)
 * [Mute audio](#mute-audio)
 * [Mute video](#mute-video)
+* [Audio output](#audio-output)
 * [Call in background mode](#call-in-background-mode)
 * [Video view](#video-view)
     - [Take snapshot](#take-snapshot)
@@ -208,6 +209,20 @@ call.isCapturing ? call.stopCapture() : call.startCapture()
 
 `call.startCapture` is shortcut for `setCapture(...)` used front camera with the default format.
 
+# Audio output
+
+You can enable/disable speaker:
+
+```
+ApiRTC.enableSpeaker()
+```
+
+and
+
+```
+ApiRTC.disableSpeaker()
+```
+
 # Call in background mode
 
 If you switch app to the background during the call session will be closed by default.
@@ -354,7 +369,7 @@ room.onEvent { event in
 
 # Conference
 
-ApiRTC allows you to make a calls in the conference mode.
+ApiRTC allows you to make calls in the conference mode.
 
 To start a new conference:
 
@@ -386,6 +401,8 @@ You can publish your media to this conference:
 ```
 conference.publish(.video)
 ```
+
+This method allows you to select a device in case of publishing a video. Also you can use the methods similar to methods of `Call` like `setCapture(...)` to change the capture device.
 
 If you are publishing the media of video type you will receive `localCaptureSession(AVCaptureSession)` conference event.
 
