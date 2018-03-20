@@ -211,16 +211,10 @@ call.isCapturing ? call.stopCapture() : call.startCapture()
 
 # Audio output
 
-You can enable/disable speaker:
+To set audio output use:
 
 ```
-ApiRTC.enableSpeaker()
-```
-
-and
-
-```
-ApiRTC.disableSpeaker()
+ApiRTC.setAudioOutput(.speaker)
 ```
 
 # Call in background mode
