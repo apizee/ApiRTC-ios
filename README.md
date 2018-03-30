@@ -122,8 +122,7 @@ call.onEvent { event in
         // Use EAGLVideoView or MetalVideoView or provide your own, eg:
         if let videoTrack = mediaStream.videoTracks.first {
             DispatchQueue.main.async {
-                self.remoteVideoTrack = videoTrack
-                self.remoteVideoTrack?.add(renderer: self.remoteVideoView.renderer)
+                videoTrack.add(renderer: self.remoteVideoView.renderer)
             }
         }
     case .closed:
