@@ -76,6 +76,7 @@ ApiRTC.initializeSDK()
 ```
 
 Initialize a new `Session` with `your_api_key`:
+
 ```
 ApiRTC.session.initialize(apiKey: Config.apiKey)
 ```
