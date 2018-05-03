@@ -63,16 +63,21 @@ pod 'ApiRTC'
 or
 
 ```
-pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.5.0'
+pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.6.0'
 ```
 
 ## Initialization
 
 
-Initialize framework with `your_api_key`:
+Initialize framework:
 
 ```
-ApiRTC.initialize(apiKey: "your_api_key")
+ApiRTC.initializeSDK()
+```
+
+Initialize a new `Session` with `your_api_key`:
+```
+ApiRTC.session.initialize(apiKey: Config.apiKey)
 ```
 
 You should attach handlers for current session events:
@@ -94,7 +99,7 @@ ApiRTC.session.onEvent { event in
 Connect current session:
 
 ```
-ApiRTC.session.connect() // `SessionEvent.connected` will be fired
+ApiRTC.session.connect() // `SessionEvent.connected` will be fired or use completion
 ```
 
 # Basic video call
@@ -136,7 +141,7 @@ call.onEvent { event in
 Call:
 
 ```
-call.start()
+try? call.start()
 ```
 
 # Video formats
