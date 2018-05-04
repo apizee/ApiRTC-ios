@@ -57,13 +57,11 @@ All code units are described in the [API Reference](http://docv2.apizee.com/sdk/
 ## Installation
 
 ```
-pod 'ApiRTC'
-```
+use_frameworks!
 
-or
-
-```
-pod 'ApiRTC', :git => 'https://github.com/apizee/ApiRTC-ios', :tag => '0.6.0'
+target 'your_target' do
+    pod 'ApiRTC', '~> 0.6.0'
+end
 ```
 
 ## Initialization
