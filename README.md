@@ -36,8 +36,9 @@ This tutorial describes how to use ApiRTC with examples from [Sample](https://gi
 ## Main classes
 
 * **ApiRTC**: Main endpoint
-* **Session**: Provides current SDK session functionality
-* **Call**: Provides peer-to-peer audio/video calls
+* **Session**: Current SDK session functionality
+* **Call**: Peer-to-peer audio/video calls
+* **Conference**: Conference calls
 
 All code units are described in the [API Reference](http://docv2.apizee.com/sdk/ios/index.html)
 
