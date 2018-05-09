@@ -61,7 +61,7 @@ All code units are described in the [API Reference](http://docv2.apizee.com/sdk/
 use_frameworks!
 
 target 'your_target' do
-    pod 'ApiRTC', '~> 0.6.0'
+    pod 'ApiRTC'
 end
 ```
 
@@ -464,6 +464,8 @@ whiteboard.brushSize = 3
 ```
 
 You can be notified about whiteboard's room user activity by subscribing to `whiteboard.room` events. See [Rooms](#rooms) section.
+
+At this moment SDK allows to have only one actual `Whiteboard` object at the same time.
 
 
 # AppStore publishing
