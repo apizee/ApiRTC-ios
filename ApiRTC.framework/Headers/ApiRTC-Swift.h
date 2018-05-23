@@ -225,14 +225,6 @@ SWIFT_CLASS("_TtC6ApiRTC13EAGLVideoView")
 @end
 
 
-/// Ready view handling video stream (uses Metal)
-SWIFT_CLASS("_TtC6ApiRTC14MetalVideoView")
-@interface MetalVideoView : VideoView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
 
 
 
