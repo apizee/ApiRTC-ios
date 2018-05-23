@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/ApiRTC.swiftmodule/arm.swiftmodule</key>
 		<data>
-		5gqK+1D6xGYm0t29ia95NjXvrjA=
+		bvveKBcZrjaqS085s2Az8nzXdhk=
 		</data>
 		<key>Modules/ApiRTC.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/ApiRTC.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		UKSwViQrxwneDRQhpWe+qxf86RQ=
+		1jXWVgMZT05hFsJwwMlMkaNrjw4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -76,11 +76,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5gqK+1D6xGYm0t29ia95NjXvrjA=
+			bvveKBcZrjaqS085s2Az8nzXdhk=
 			</data>
 			<key>hash2</key>
 			<data>
-			NEyM+ZueIqYYC9B3KVPlSYffs34ktmtHJIIAFBQsH1c=
+			8xAubhVembAdc8WEDEuDgSP/eXAMEr3VgZwPLcLtRTY=
 			</data>
 		</dict>
 		<key>Modules/ApiRTC.swiftmodule/arm64.swiftdoc</key>
@@ -98,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UKSwViQrxwneDRQhpWe+qxf86RQ=
+			1jXWVgMZT05hFsJwwMlMkaNrjw4=
 			</data>
 			<key>hash2</key>
 			<data>
-			VFPDA+l3iDCybADBEO9ufWzO5OktM+r4mxffXaokiEI=
+			PO62uk9xyBQtfCwEh8uFMyIY7KPZRuxkWC2J6YRMZzI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
