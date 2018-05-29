@@ -210,18 +210,22 @@ SWIFT_CLASS("_TtC6ApiRTC9VideoView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class RTCEAGLVideoView;
 
 /// Ready view handling video stream
 SWIFT_CLASS("_TtC6ApiRTC13EAGLVideoView")
-@interface EAGLVideoView : VideoView <RTCEAGLVideoViewDelegate>
+@interface EAGLVideoView : VideoView
 /// only .scaleAspectFit & scaleAspectFill have an effect
 @property (nonatomic) UIViewContentMode contentMode;
 @property (nonatomic) CGRect frame;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (void)videoView:(RTCEAGLVideoView * _Nonnull)videoView didChangeVideoSize:(CGSize)size;
 - (void)layoutSubviews;
+@end
+
+@protocol RTCVideoRenderer;
+
+@interface EAGLVideoView (SWIFT_EXTENSION(ApiRTC)) <RTCEAGLVideoViewDelegate>
+- (void)videoView:(id <RTCVideoRenderer> _Nonnull)videoView didChangeVideoSize:(CGSize)size;
 @end
 
 
@@ -236,7 +240,7 @@ SWIFT_CLASS("_TtC6ApiRTC13EAGLVideoView")
 
 /// Whiteboard view
 SWIFT_CLASS("_TtC6ApiRTC14WhiteboardView")
-@interface WhiteboardView : UIImageView
+@interface WhiteboardView : UIView
 @property (nonatomic) CGRect frame;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
@@ -244,8 +248,6 @@ SWIFT_CLASS("_TtC6ApiRTC14WhiteboardView")
 - (void)touchesMoved:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
 - (void)touchesEnded:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
 - (void)touchesCancelled:(NSSet<UITouch *> * _Nonnull)touches withEvent:(UIEvent * _Nullable)event;
-- (nonnull instancetype)initWithImage:(UIImage * _Nullable)image SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithImage:(UIImage * _Nullable)image highlightedImage:(UIImage * _Nullable)highlightedImage SWIFT_UNAVAILABLE;
 @end
 
 #if __has_attribute(external_source_symbol)
