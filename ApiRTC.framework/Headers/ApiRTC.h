@@ -2,7 +2,8 @@
 //  ApiRTC.h
 //  ApiRTC
 //
-//  Copyright © 2017 Apizee. All rights reserved.
+//  Created by Aleksandr Khorobrykh on 25/09/2018.
+//  Copyright © 2018 Apizee. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

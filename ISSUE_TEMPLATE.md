@@ -1,4 +1,4 @@
 * iOS Version:
 * Xcode version:
-* Device or emulator:
+* Device or simulator:
 * ApiRTC version:
