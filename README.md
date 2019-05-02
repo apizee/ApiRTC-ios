@@ -14,4 +14,4 @@ ApiRTC cloud-based WebRTC API are built for web and mobile developers. Empower y
 # AppStore publishing
 
 If you're publishing your app to the AppStore you may need to remove unused architectures from the framework. 
-Go to the **Build Phases** -> Add **New Run Script Phase** -> Insert content of *Utils/strip-architecture.sh*
+Go to the **Build Phases** -> Add **New Run Script Phase** -> Insert content of *strip-architecture.sh*
