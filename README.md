@@ -11,7 +11,7 @@ ApiRTC cloud-based WebRTC API are built for web and mobile developers. Empower y
 * Xcode 10+
 * Bitcode is not supported at this moment
 
-# AppStore publishing
+# AppStore
 
 If you're publishing your app to the AppStore you may need to remove unused architectures from the framework. 
 Go to the **Build Phases** -> Add **New Run Script Phase** -> Insert content of *strip-architecture.sh*
