@@ -68,7 +68,7 @@ ua.register(registerInformation: RegisterInformation(password: "your_pass")) { (
 You can take actual contacts from the current session:
 
 ```
-let contacts = session.getContacts("group_id") // all contacts in your environment join at least "default" group
+let contacts = session.getContacts("group_id") // all contacts in the environment join at least "default" group
 ```
 
 ```
@@ -174,7 +174,7 @@ Note: you may need to cast `Stream` to some alias to avoid crossing with Cocoa c
 
 ### Stream rendering
 
-In case of a local stream it should keep `AVCaptureSession` presented by `stream.captureSesssion` variable .  Local stream may be conveniently handled with embedded `CameraView` class:
+In case of a local stream it should keep `AVCaptureSession` presented by `stream.captureSesssion` variable.  Local stream may be conveniently handled with embedded `CameraView` class:
 
 ```
 let cameraView = CameraView(...)
@@ -198,7 +198,7 @@ videoTrack.removeRenderer()
 
 ## Whiteboard
 
-If you are who starts the whiteboard session you should have connected `UserAgent` then you can start
+If you are who starts the whiteboard session you should have connected `UserAgent` then you can start:
 
 ```
 userAgent.startWhiteboard { (error, whiteboardClient) in
@@ -230,7 +230,7 @@ session.onEvent(self, { (event) in
 
 ### Whiteboard view
 
-Use embedded whiteboard view to handle whiteboard data.
+Use embedded whiteboard view to present whiteboard.
 
 ```
 let whiteboardView = WhiteboardView(...)
@@ -241,7 +241,7 @@ whiteboardView.setMode(.edit)
 
 ## Invitation handling
 
-If you deal with any invitation you can subscribe on invitation events to get actual information about current state:
+If you deal with any invitation you can subscribe on invitation events to get an actual information about current state:
 
 ```
 invitation.onEvent(self, { (event) in
