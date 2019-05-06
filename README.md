@@ -43,7 +43,7 @@ Using our User Management System will enables you to simplify WebRTC integration
 
 ### Registration with external users management
 
-In order to start communicating with other users, UserAgent has to be registered on Apizee platform. ApiKey is used to isolate your project so you will be able to communicate with users that are registered with the same apiKey.
+In order to start communication with other users, UserAgent has to be registered on Apizee platform. ApiKey is used to isolate your project so you will be able to communicate with users that are registered with the same apiKey.
 
 ```
 ua = UserAgent(UserAgentOptions(uri: .apzkey("your_api_key")))`
@@ -202,7 +202,7 @@ If you are who starts the whiteboard session you should have connected `UserAgen
 
 ```
 userAgent.startWhiteboard { (error, whiteboardClient) in
-    // the you can use WhiteboardClient to change whiteboard settings, set rendering view etc
+    // then you can use WhiteboardClient to deal with whiteboard settings, set rendering view etc
 }
 ```
 
