@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 s.name         = 'ApiRTC'
 s.module_name  = 'ApiRTC'
-s.version      = '0.7.0'
+s.version      = '0.7.1'
 s.summary      = 'ApiRTC is a WebRTC Platform as a Service that simplifies developers access to WebRTC technology'
 s.description  = 'ApiRTC cloud-based WebRTC API are built for web and mobile developers. Empower you website with real-time text, audio and video interaction by leveraging our javascript library (compatible Node.js or Angular.js) or use our plugins for your mobile apps. Apizee takes care of browser compatibility, security and NAT traversal issues for you.'
 s.homepage     = 'https://apirtc.com'
