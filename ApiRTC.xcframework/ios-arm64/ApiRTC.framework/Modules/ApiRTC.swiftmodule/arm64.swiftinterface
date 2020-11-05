@@ -1,0 +1,2059 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ApiRTC
+import AVFoundation
+import AVKit
+@_exported import ApiRTC
+import CocoaAsyncSocket
+import Foundation
+import MobileCoreServices
+import RxCocoa
+import RxSwift
+import SocketIO
+import Swift
+import SystemConfiguration
+import UIKit
+import WebRTC
+public protocol Event : Swift.Equatable {
+}
+@_inheritsConvenienceInitializers open class Observable<T> : ObjectiveC.NSObject where T : ApiRTC.Event {
+  open func removeObserver(_ observer: Swift.AnyObject)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@_hasMissingDesignatedInitializers open class Enterprise {
+  open func getId() -> Swift.Int
+  open class func fetchEnterpriseInformation(options: ApiRTC.FetchEnterpriseInformationOptions, completion: @escaping (Swift.Error?, ApiRTC.EnterpriseInformation?) -> Swift.Void)
+  open class func fetchSiteAgents(siteKey: Swift.String, options: ApiRTC.FetchSiteAgentsOptions? = nil, completion: @escaping (Swift.Error?, [ApiRTC.Agent]?) -> Swift.Void)
+  open func createPrivateConference(_ options: ApiRTC.PrivateConferenceCreationOptions, completion: @escaping (Swift.Error?, ApiRTC.Conference?) -> Swift.Void)
+  open func getAvailableConferences(completion: @escaping (Swift.Error?, [ApiRTC.Conference]?) -> Swift.Void)
+  open func getContacts(completion: @escaping (Swift.Error?, [ApiRTC.Contact]?) -> Swift.Void)
+  open func getTags(webConferenceId: Swift.String? = nil, completion: @escaping (Swift.Error?, [ApiRTC.EnterpriseTag]?) -> Swift.Void)
+  @objc deinit
+}
+public struct AnswerOptions {
+  public var streamTypeForIncomingCall: ApiRTC.StreamType {
+    get
+  }
+  public var isAudioMuted: Swift.Bool {
+    get
+  }
+  public var isVideoMuted: Swift.Bool {
+    get
+  }
+  public init(streamTypeForOutgoingCall: ApiRTC.StreamType = .video, isAudioMuted: Swift.Bool = false, isVideoMuted: Swift.Bool = false)
+}
+public enum ContactListUpdateType {
+  case join
+  case left
+  case userDataChange
+  public static func == (a: ApiRTC.ContactListUpdateType, b: ApiRTC.ContactListUpdateType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct ContactListUpdate {
+  public var type: ApiRTC.ContactListUpdateType {
+    get
+  }
+  public var contacts: [ApiRTC.Contact] {
+    get
+  }
+}
+public enum GroupChatMessageEvent : ApiRTC.Event {
+  case received
+  public static func == (a: ApiRTC.GroupChatMessageEvent, b: ApiRTC.GroupChatMessageEvent) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class GroupChatMessage : ApiRTC.Observable<ApiRTC.ContactMessageEvent> {
+  open var contact: ApiRTC.Contact! {
+    get
+  }
+  open var conversation: ApiRTC.Conversation! {
+    get
+  }
+  open var content: Swift.String! {
+    get
+  }
+  open var time: Foundation.Date! {
+    get
+  }
+  @objc deinit
+  @objc override dynamic public init()
+}
+public struct StreamMuteStateChange {
+  public var streamId: Swift.String! {
+    get
+  }
+  public var type: ApiRTC.StreamMutingLineType! {
+    get
+  }
+  public var isMuted: Swift.Bool! {
+    get
+  }
+}
+@dynamicMemberLookup public struct UserData {
+  public mutating func setProps(_ object: Swift.AnyObject)
+  public func setToSession()
+}
+public struct EnterpriseTag {
+  public var id: Swift.String! {
+    get
+  }
+  public var name: Swift.String! {
+    get
+  }
+}
+public enum WhiteboardEvent : ApiRTC.Event {
+  case newDrawingElement(ApiRTC.DrawingElement)
+  case startTextAtPoint(CoreGraphics.CGPoint)
+  case newCanvasSize(CoreGraphics.CGSize)
+  case newBackgroundImage(UIKit.UIImage)
+  case error(Swift.Error)
+  public static func == (lhs: ApiRTC.WhiteboardEvent, rhs: ApiRTC.WhiteboardEvent) -> Swift.Bool
+}
+public enum WhiteboardTool {
+  case void
+  case pen
+  case eraser
+  case rect
+  case ellipse
+  case arrow
+  case text
+  public static func == (a: ApiRTC.WhiteboardTool, b: ApiRTC.WhiteboardTool) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_inheritsConvenienceInitializers open class WhiteboardClient : ApiRTC.Observable<ApiRTC.WhiteboardEvent> {
+  weak open var view: ApiRTC.WhiteboardView? {
+    get
+  }
+  open var color: UIKit.UIColor {
+    get
+  }
+  open var cursorColor: UIKit.UIColor {
+    get
+  }
+  open var brushWidth: Swift.Int {
+    get
+  }
+  open var fontSize: Swift.Int {
+    get
+  }
+  open var canUndo: Swift.Bool {
+    get
+  }
+  open var canRedo: Swift.Bool {
+    get
+  }
+  open var showCursors: Swift.Bool {
+    get
+  }
+  open var tool: ApiRTC.WhiteboardTool {
+    get
+  }
+  open var sheetId: Swift.Int {
+    get
+  }
+  open var canTakeSnapshot: Swift.Bool {
+    get
+  }
+  open var isOwned: Swift.Bool {
+    get
+  }
+  open func setView(_ view: ApiRTC.WhiteboardView)
+  open func setColor(_ color: UIKit.UIColor)
+  open func setCursorColor(_ cursorColor: UIKit.UIColor)
+  open func setBrushWidth(_ brushWidth: Swift.Int)
+  open func setFontSize(_ fontSize: Swift.Int)
+  open func setShowCursors(_ showCursors: Swift.Bool)
+  open func setTool(_ tool: ApiRTC.WhiteboardTool)
+  open func undo()
+  open func redo()
+  open func setBackgroundImageUrl(_ url: Foundation.URL)
+  open func createNewSheet()
+  open func addText(_ text: Swift.String, atPoint point: CoreGraphics.CGPoint)
+  open func takeSnapshot() -> UIKit.UIImage?
+  open func onEvent(_ observer: Swift.AnyObject, _ callback: @escaping ((ApiRTC.WhiteboardEvent) -> Swift.Void))
+  @objc deinit
+  @objc override dynamic public init()
+}
+public struct FetchSiteAgentsOptions {
+  public var usePresence: Swift.Bool? {
+    get
+  }
+  public var useAcd: Swift.Bool? {
+    get
+  }
+  public var cloudUrl: Swift.String? {
+    get
+  }
+  public var convId: Swift.String? {
+    get
+  }
+  public init(usePresence: Swift.Bool? = nil, useAcd: Swift.Bool? = nil, cloudUrl: Swift.String? = nil, convId: Swift.String? = nil)
+}
+public enum CallEvent : ApiRTC.Event {
+  case localStreamAvailable(ApiRTC.Stream)
+  case streamAdded(ApiRTC.Stream)
+  case streamRemoved(ApiRTC.Stream)
+  case hangup
+  case accepted
+  case declined
+  case localStreamUpdated(ApiRTC.StreamUpdate)
+  case remoteStreamUpdated(ApiRTC.StreamUpdate)
+  case error(Swift.Error)
+  public static func == (lhs: ApiRTC.CallEvent, rhs: ApiRTC.CallEvent) -> Swift.Bool
+}
+public enum CallStatus {
+  case initialized
+  case onGoing
+  case ended
+  public static func == (a: ApiRTC.CallStatus, b: ApiRTC.CallStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class Call : ApiRTC.Observable<ApiRTC.CallEvent> {
+  open var id: Swift.String! {
+    get
+  }
+  open var status: ApiRTC.CallStatus! {
+    get
+  }
+  open func hangUp(completion: @escaping () -> Swift.Void)
+  open func replacePublishedStream(withStream stream: ApiRTC.Stream, completion: @escaping (Swift.Error?) -> Swift.Void)
+  open func stopPublishedStream(streamId: Swift.String, completion: @escaping (Swift.Error?) -> Swift.Void)
+  open func getReceivedStreams() -> [ApiRTC.Stream]?
+  open func getPublishedStreams() -> [ApiRTC.Stream]?
+  open func getContact() -> ApiRTC.Contact?
+  open func onEvent(_ observer: Swift.AnyObject, _ callback: @escaping ((ApiRTC.CallEvent) -> Swift.Void))
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class AudioTrack : ApiRTC.MediaTrack {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class Conference : ApiRTC.Conversation {
+  @objc deinit
+}
+public struct SubscribeOptions {
+  public var mediaRestriction: ApiRTC.StreamMediaRestriction? {
+    get
+  }
+  public init(mediaRestriction: ApiRTC.StreamMediaRestriction? = nil)
+}
+public struct PrivateConferenceCreationOptions {
+  public var friendlyName: Swift.String! {
+    get
+  }
+  public var password: Swift.String? {
+    get
+  }
+  public init(friendlyName: Swift.String, password: Swift.String? = nil)
+}
+open class UserAgent {
+  open var photoUrl: Swift.String? {
+    get
+  }
+  open var username: Swift.String? {
+    get
+  }
+  public init(_ options: ApiRTC.UserAgentOptions)
+  open func register(registerInformation: ApiRTC.RegisterInformation? = nil, completion: @escaping (Swift.Error?, ApiRTC.Session?) -> Swift.Void)
+  open func unregister(options: ApiRTC.DisconnectOptions? = nil, completion: @escaping (Swift.Error?) -> Swift.Void)
+  open func getCurrentSession() -> ApiRTC.Session?
+  open func setUserData(_ userData: ApiRTC.UserData)
+  open func getWhiteboardClient() -> ApiRTC.WhiteboardClient?
+  open func getEnterprise() -> ApiRTC.Enterprise?
+  open func isRegistered() -> Swift.Bool
+  @objc deinit
+}
+public struct StreamUpdate {
+  public var callId: Swift.String {
+    get
+  }
+  public var streamId: Swift.String {
+    get
+  }
+  public var audio: Swift.Bool {
+    get
+  }
+  public var audioMuted: Swift.Bool {
+    get
+  }
+  public var video: Swift.Bool {
+    get
+  }
+  public var videoMuted: Swift.Bool {
+    get
+  }
+}
+public struct FetchEnterpriseInformationOptions {
+  public var apiKey: Swift.String! {
+    get
+  }
+  public var id: Swift.String? {
+    get
+  }
+  public var siteKey: Swift.String? {
+    get
+  }
+  public var cloudUrl: Swift.String? {
+    get
+  }
+  public init(apiKey: Swift.String, id: Swift.String? = nil, siteKey: Swift.String? = nil, cloudUrl: Swift.String? = nil)
+}
+public enum ContactMessageEvent : ApiRTC.Event {
+  case received
+  public static func == (a: ApiRTC.ContactMessageEvent, b: ApiRTC.ContactMessageEvent) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class ContactMessage : ApiRTC.Observable<ApiRTC.ContactMessageEvent> {
+  open var id: Swift.String {
+    get
+  }
+  open var contact: ApiRTC.Contact! {
+    get
+  }
+  open var content: Swift.String! {
+    get
+  }
+  open var time: Foundation.Date! {
+    get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum ExternalCameraState {
+  case connected
+  case disconnected
+  public static func == (a: ApiRTC.ExternalCameraState, b: ApiRTC.ExternalCameraState) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum RoomMemberUpdateType {
+  case join
+  case left
+  public static func == (a: ApiRTC.RoomMemberUpdateType, b: ApiRTC.RoomMemberUpdateType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct RoomMemberUpdate {
+  public var type: ApiRTC.RoomMemberUpdateType {
+    get
+  }
+  public var roomId: Swift.String {
+    get
+  }
+  public var contacts: [ApiRTC.Contact] {
+    get
+  }
+}
+public enum UserAgentURI {
+  case apzkey(Swift.String)
+  case apizee(Swift.String)
+}
+public struct UserAgentOptions {
+  public var uri: ApiRTC.UserAgentURI {
+    get
+  }
+  public init(uri: ApiRTC.UserAgentURI)
+}
+public struct EnterpriseInformation {
+  public var id: Swift.Int! {
+    get
+  }
+  public var name: Swift.String! {
+    get
+  }
+  public var preferredCCS: Swift.String! {
+    get
+  }
+  public var apiKey: Swift.String! {
+    get
+  }
+  public var logo: Swift.String? {
+    get
+  }
+  public var city: Swift.String? {
+    get
+  }
+  public var address: Swift.String? {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers open class MediaConv {
+  open var id: Swift.Int? {
+    get
+  }
+  open var type: Swift.Int? {
+    get
+  }
+  open var name: Swift.String? {
+    get
+  }
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class VideoTrack : ApiRTC.MediaTrack {
+  open func addRenderer(_ renderer: WebRTC.RTCVideoRenderer)
+  open func removeRenderer()
+  @objc deinit
+}
+public enum ContactEvent : ApiRTC.Event {
+  case joinGroup(Swift.String)
+  case leftGroup(Swift.String)
+  case message(ApiRTC.ContactMessage)
+  public static func == (lhs: ApiRTC.ContactEvent, rhs: ApiRTC.ContactEvent) -> Swift.Bool
+}
+public enum ContactCallState {
+  case noCall
+  case contacting
+  case contacted
+  case answered
+  public static func == (a: ApiRTC.ContactCallState, b: ApiRTC.ContactCallState) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class Contact : ApiRTC.Observable<ApiRTC.ContactEvent> {
+  open var id: Swift.String! {
+    get
+  }
+  open var callState: ApiRTC.ContactCallState! {
+    get
+  }
+  open var userData: ApiRTC.UserData? {
+    get
+  }
+  open func inGroup(_ group: Swift.String) -> Swift.Bool
+  open func isOnline() -> Swift.Bool
+  open func call(stream: ApiRTC.Stream? = nil, options: ApiRTC.CallOptions? = nil, completion: @escaping (Swift.Error?, ApiRTC.Call?) -> Swift.Void)
+  open func onEvent(_ observer: Swift.AnyObject, _ callback: @escaping ((ApiRTC.ContactEvent) -> Swift.Void))
+  open func sendMessage(message: Swift.String, completion: @escaping (Swift.Error?) -> Swift.Void)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct CallOptions {
+  public var streamTypeForOutgoingCall: ApiRTC.StreamType {
+    get
+  }
+  public var isAudioMuted: Swift.Bool {
+    get
+  }
+  public var isVideoMuted: Swift.Bool {
+    get
+  }
+  public init(streamTypeForOutgoingCall: ApiRTC.StreamType = .video, isAudioMuted: Swift.Bool = false, isVideoMuted: Swift.Bool = false)
+}
+@_hasMissingDesignatedInitializers open class ApiRTC {
+  open var isCloudServerAvailabilityCheckerEnabled: Swift.Bool {
+    get
+  }
+  open var isAutoReconnectEnabled: Swift.Bool {
+    get
+  }
+  open var logTypes: [ApiRTC.LogType]? {
+    get
+  }
+  open var isSocketDebugLogEnabled: Swift.Bool {
+    get
+  }
+  open var isMetaInfoLogEnabled: Swift.Bool {
+    get
+  }
+  open var isPresenceUpdatesLogSuppressed: Swift.Bool {
+    get
+  }
+  open var isLogToFileEnabled: Swift.Bool {
+    get
+  }
+  open class func setCloudServerAvailabilityChecker(enabled: Swift.Bool)
+  open class func setAutoReconnectEnabled(enabled: Swift.Bool)
+  open class func setLogTypes(_ types: [ApiRTC.LogType]?)
+  open class func setSocketDebugLog(enabled: Swift.Bool)
+  open class func setMetaInfoLog(enabled: Swift.Bool)
+  open class func setPresenceLogSuppressed(_ value: Swift.Bool)
+  open class func setExternalCameraManagementEnabled(_ value: Swift.Bool)
+  open class func setLogToFile(enabled: Swift.Bool)
+  open class func addToLogFile(_ string: Swift.String)
+  open class func clearLogFile()
+  open class func getLogFileURL() throws -> Foundation.URL?
+  @objc deinit
+}
+public enum InvitationStatus {
+  case standBy
+  case accepted
+  case declined
+  case expired
+  case cancelled
+  case ended
+  public static func == (a: ApiRTC.InvitationStatus, b: ApiRTC.InvitationStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum InvitationEvent : ApiRTC.Event {
+  case received
+  case statusChanged(ApiRTC.InvitationStatus)
+  public static func == (a: ApiRTC.InvitationEvent, b: ApiRTC.InvitationEvent) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers open class Invitation : ApiRTC.Observable<ApiRTC.InvitationEvent> {
+  open var id: Swift.String {
+    get
+  }
+  open var status: ApiRTC.InvitationStatus {
+    get
+  }
+  open func onEvent(_ observer: Swift.AnyObject, _ callback: @escaping ((ApiRTC.InvitationEvent) -> Swift.Void))
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum ConversationCallStatus {
+  case initialized
+  case onGoing
+  case failed
+  case ended
+  public static func == (a: ApiRTC.ConversationCallStatus, b: ApiRTC.ConversationCallStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class ConversationCall {
+  open var id: Swift.String! {
+    get
+  }
+  open var status: ApiRTC.ConversationCallStatus! {
+    get
+  }
+  open var stream: ApiRTC.Stream? {
+    get
+  }
+  open func replacePublishedStream(streamId: Swift.String, withStream stream: ApiRTC.Stream, completion: @escaping (Swift.Error?, ApiRTC.Stream?) -> Swift.Void)
+  open func getConversation() -> ApiRTC.Conversation?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class ReceivedConversationJoinRequest : ApiRTC.ReceivedInvitation {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class ReceivedCallInvitation : ApiRTC.ReceivedInvitation {
+  open var callId: Swift.String! {
+    get
+  }
+  open func accept(stream: ApiRTC.Stream? = nil, options: ApiRTC.AnswerOptions? = nil, completion: @escaping (Swift.Error?, ApiRTC.Call?) -> Swift.Void)
+  open func decline(completion: @escaping (Swift.Error?) -> Swift.Void)
+  open func getCall() -> ApiRTC.Call?
+  @objc deinit
+}
+public enum WhiteboardViewMode {
+  case preview
+  case edit
+  public static func == (a: ApiRTC.WhiteboardViewMode, b: ApiRTC.WhiteboardViewMode) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers open class WhiteboardView : UIKit.UIView {
+  open var mode: ApiRTC.WhiteboardViewMode {
+    get
+  }
+  open var cursorSize: CoreGraphics.CGSize {
+    get
+  }
+  open var arrowSize: CoreGraphics.CGSize {
+    get
+  }
+  @objc override dynamic open var frame: CoreGraphics.CGRect {
+    @objc get
+    @objc set
+  }
+  open var backgroundImage: UIKit.UIImage? {
+    get
+  }
+  open var onTap: ((CoreGraphics.CGPoint) -> Swift.Void)?
+  open var onDoubleTap: ((CoreGraphics.CGPoint) -> Swift.Void)?
+  @objc required override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  open func setMode(_ mode: ApiRTC.WhiteboardViewMode)
+  open func setCursorSize(_ cursorSize: CoreGraphics.CGSize)
+  open func setArrowSize(_ arrowSize: CoreGraphics.CGSize)
+  @objc override dynamic open func touchesBegan(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
+  @objc override dynamic open func touchesMoved(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
+  @objc override dynamic open func touchesEnded(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
+  @objc override dynamic open func touchesCancelled(_ touches: Swift.Set<UIKit.UITouch>, with event: UIKit.UIEvent?)
+  open func setBackgroundImage(_ image: UIKit.UIImage?, contentMode: UIKit.UIView.ContentMode)
+  @objc deinit
+}
+public struct DisconnectOptions {
+  public var invalidateUserToken: Swift.Bool {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers open class SentInvitation : ApiRTC.Invitation {
+  open var userId: Swift.String! {
+    get
+  }
+  open var isReceived: Swift.Bool {
+    get
+  }
+  open func cancel()
+  @objc deinit
+}
+public struct Agent {
+  public var contact: ApiRTC.Contact! {
+    get
+  }
+  public var title: Swift.String? {
+    get
+  }
+  public var nickname: Swift.String! {
+    get
+  }
+  public var isPrefered: Swift.Bool! {
+    get
+  }
+}
+public enum ConversationEvent : ApiRTC.Event {
+  case joined
+  case left
+  case contactJoined(ApiRTC.Contact)
+  case contactLeft(ApiRTC.Contact)
+  case streamListChanged(ApiRTC.StreamInfoType, ApiRTC.StreamInfo)
+  case streamAdded(ApiRTC.Stream)
+  case streamRemoved(ApiRTC.Stream)
+  case localStreamUpdated(ApiRTC.StreamUpdate)
+  case remoteStreamUpdated(ApiRTC.StreamUpdate)
+  case waitingForModeratorAcceptance(ApiRTC.Contact?)
+  case receiveGroupChatMessage(ApiRTC.GroupChatMessage)
+  case joinedGroupChat
+  case newWhiteboardClient(ApiRTC.WhiteboardClient)
+  case whiteboardClosed
+  case error(Swift.Error)
+  public static func == (lhs: ApiRTC.ConversationEvent, rhs: ApiRTC.ConversationEvent) -> Swift.Bool
+}
+public enum ConversationStatus {
+  case notJoined
+  case joining
+  case joined
+  case closed
+  public static func == (a: ApiRTC.ConversationStatus, b: ApiRTC.ConversationStatus) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum ConversationUserRole {
+  case guest
+  case contributor
+  case moderator
+  public static func == (a: ApiRTC.ConversationUserRole, b: ApiRTC.ConversationUserRole) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum ConversationAccess {
+  case granted
+  case refused
+  case needModeratorAcceptation
+  public static func == (a: ApiRTC.ConversationAccess, b: ApiRTC.ConversationAccess) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class Conversation : ApiRTC.Observable<ApiRTC.ConversationEvent> {
+  open var status: ApiRTC.ConversationStatus! {
+    get
+  }
+  open var groupChatStatus: ApiRTC.ConversationStatus! {
+    get
+  }
+  open var access: ApiRTC.ConversationAccess? {
+    get
+  }
+  open var role: ApiRTC.ConversationUserRole? {
+    get
+  }
+  open var friendlyName: Swift.String? {
+    get
+  }
+  open var instanceId: Swift.String? {
+    get
+  }
+  open var moderatorId: Swift.String? {
+    get
+  }
+  open var ownerId: Swift.String? {
+    get
+  }
+  open var cloudId: Swift.String? {
+    get
+  }
+  open var hasPassword: Swift.Bool? {
+    get
+  }
+  open func join(options: ApiRTC.JoinOptions? = nil, completion: @escaping (Swift.Error?, Swift.Bool) -> Swift.Void)
+  open func cancelJoin()
+  open func leave(completion: (() -> Swift.Void)? = nil)
+  open func sendInvitation(contact: ApiRTC.Contact, completion: @escaping (Swift.Error?, ApiRTC.SentInvitation?) -> Swift.Void)
+  open func isGroupChatJoined() -> Swift.Bool
+  open func joinGroupChat(completion: @escaping (Swift.Error?) -> Swift.Void)
+  open func leaveGroupChat(completion: @escaping (Swift.Error?) -> Swift.Void)
+  open func sendMessage(message: Swift.String, completion: @escaping (Swift.Error?) -> Swift.Void)
+  open func publish(stream: ApiRTC.Stream, options: ApiRTC.PublishOptions? = nil, completion: @escaping (Swift.Error?, ApiRTC.Stream?) -> Swift.Void)
+  open func unpublishStreamWithId(_ streamId: Swift.String, completion: @escaping () -> Swift.Void)
+  open func subscribeToStream(streamId: Swift.String, options: ApiRTC.SubscribeOptions? = nil)
+  open func unsubscribeFromStreamWithId(_ streamId: Swift.String)
+  open func getAvailableStreamList() -> [ApiRTC.StreamInfo]
+  open func getPublishedStreams() -> [ApiRTC.Stream]?
+  open func getSubscribedStreams() -> [ApiRTC.Stream]?
+  open func getContacts() -> [ApiRTC.Contact]?
+  open func getName() -> Swift.String
+  open func getConversationCall(_ streamId: Swift.String) -> ApiRTC.ConversationCall?
+  open func isJoined() -> Swift.Bool
+  open func startWhiteboardSession(completion: @escaping (Swift.Error?, ApiRTC.WhiteboardClient?) -> Swift.Void)
+  open func stopWhiteboardSession()
+  open func checkAccess(completion: @escaping (Swift.Error?, ApiRTC.ConversationAccess?) -> Swift.Void)
+  open func pushMedia(media: Foundation.Data, options: [Swift.String : Any?], completion: @escaping (Swift.Error?, ApiRTC.MediaUploaded?) -> Swift.Void)
+  open func fetchMediaList(option: [Swift.String : Any?]?, completion: ((Swift.Error?, [ApiRTC.Media]?) -> Swift.Void)? = nil)
+  open func onEvent(_ observer: Swift.AnyObject, _ callback: @escaping ((ApiRTC.ConversationEvent) -> Swift.Void))
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class CameraView : WebRTC.RTCCameraPreviewView {
+  weak open var previewLayer: AVFoundation.AVCaptureVideoPreviewLayer? {
+    get
+  }
+  @objc override dynamic public init(frame: CoreGraphics.CGRect = .zero)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class MediaStream {
+  open var id: Swift.String! {
+    get
+  }
+  open var streamId: Swift.String? {
+    get
+  }
+  open var videoTracks: [ApiRTC.VideoTrack] {
+    get
+  }
+  open var audioTracks: [ApiRTC.AudioTrack] {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class ReceivedConversationInvitation : ApiRTC.ReceivedInvitation {
+  open func accept(stream: ApiRTC.Stream? = nil, options: ApiRTC.JoinOptions? = nil, completion: @escaping (Swift.Error?, ApiRTC.Conversation?) -> Swift.Void)
+  open func decline(reason: Swift.String? = nil)
+  open func getConversation() -> ApiRTC.Conversation?
+  @objc deinit
+}
+public enum StreamInfoType {
+  case added
+  case removed
+  public static func == (a: ApiRTC.StreamInfoType, b: ApiRTC.StreamInfoType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct StreamInfo {
+  public var streamId: Swift.String {
+    get
+  }
+  public var hasAuido: Swift.Bool {
+    get
+  }
+  public var hasVideo: Swift.Bool {
+    get
+  }
+  public var isAudioMuted: Swift.Bool {
+    get
+  }
+  public var isVideoMuted: Swift.Bool {
+    get
+  }
+  public var isScreensharing: Swift.Bool {
+    get
+  }
+  public var isRemote: Swift.Bool {
+    get
+  }
+  public var callId: Swift.String {
+    get
+  }
+  public var ownerId: Swift.String {
+    get
+  }
+  public var time: Foundation.Date {
+    get
+  }
+}
+open class CloudApi {
+  public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class ReceivedInvitation : ApiRTC.Invitation {
+  open func getSender() -> ApiRTC.Contact
+  open func getReceiveTime() -> Foundation.Date
+  @objc deinit
+}
+public enum MediaTrackType {
+  case audio
+  case video
+  public static func == (a: ApiRTC.MediaTrackType, b: ApiRTC.MediaTrackType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class MediaTrack {
+  open var id: Swift.String! {
+    get
+  }
+  open var type: ApiRTC.MediaTrackType! {
+    get
+  }
+  open var isEnabled: Swift.Bool {
+    get
+  }
+  @objc deinit
+}
+public protocol E : Foundation.LocalizedError {
+}
+public enum ApiRTCError : ApiRTC.E {
+  case err(Swift.AnyObject?, Swift.String?, Any?)
+  public enum UserAgent : Foundation.LocalizedError {
+    case sessionIsNotNil
+    case uriIsNil
+    case cssIsNil
+    case passwordIsNil
+    case messageIsNil
+    case tokenCheckFailed
+    case isNotRegistered
+    case tokenIsNil
+    public static func == (a: ApiRTC.ApiRTCError.UserAgent, b: ApiRTC.ApiRTCError.UserAgent) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case userAgent(ApiRTC.ApiRTCError.UserAgent)
+  public enum Sesssion : ApiRTC.E {
+    case maxFirstPresenceTimeWaitExceeded
+    case maxConnectionTimeExceeded
+    case serverIsNotAvailable
+    case wasDisconnected
+    case apiKeyIsNil
+    case cssIsNil
+    case urlIsNil
+    public static func == (a: ApiRTC.ApiRTCError.Sesssion, b: ApiRTC.ApiRTCError.Sesssion) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case session(ApiRTC.Session)
+  public enum Network : ApiRTC.E {
+    case startNotifier
+    case cantCreateTestURLFromString(Swift.String)
+  }
+  case network(ApiRTC.ApiRTCError.Network)
+  public enum Contact : ApiRTC.E {
+    case idIsNil
+    case callStateIsNil
+    case noCallStateForStringValue(Swift.String)
+    case messageTimeOut
+  }
+  case contact(ApiRTC.ApiRTCError.Contact)
+  public enum Token : ApiRTC.E {
+    case tokenIsNil
+    case dateIsNil
+    case wrongDateFormat
+    case expiresInIsNil
+    public static func == (a: ApiRTC.ApiRTCError.Token, b: ApiRTC.ApiRTCError.Token) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case token(ApiRTC.ApiRTCError.Token)
+  public enum Stream : ApiRTC.E {
+    case idIsNil
+    case roomIdIsNil
+    case videoIsNil
+    case audioIsNil
+    case dataIsNil
+    case screenIsNil
+    case attributesIsNil
+    case nameIsNil
+    case typeIsNil
+    case unknownType(Any)
+    case callIdIsNil
+    case callerIdIsNil
+    case deviceIsNilForPosition(AVFoundation.AVCaptureDevice.Position)
+    case noSupportedFormatForDevice(AVFoundation.AVCaptureDevice)
+  }
+  case stream(ApiRTC.ApiRTCError.Stream)
+  public enum StreamInfo : ApiRTC.E {
+    case idIsNil
+    case roomIdIsNil
+    case audioIsNil
+    case videoIsNil
+    case audioMutedIsNil
+    case videoMutedIsNil
+    case screenIsNil
+    case attributesIsNil
+    case nameIsNil
+    case typeIsNil
+    case callIdIsNil
+    case callerIdIsNil
+    case unknownType(Any)
+  }
+  case streamInfo(ApiRTC.ApiRTCError.StreamInfo)
+  public enum CloudRequest : ApiRTC.E {
+    case unknown(Swift.Error?)
+    case dataIsNil
+    case wrongResponse(Any?)
+  }
+  case cloudRequest(ApiRTC.ApiRTCError.CloudRequest)
+  public enum CloudMessage : ApiRTC.E {
+    case dataHasUnknownFormat
+    case noInitializerForRequestType(Any)
+  }
+  case cloudMessage(ApiRTC.ApiRTCError.CloudMessage)
+  public enum CloudApi : ApiRTC.E {
+    case urlComponentsIsNil
+    case dataIsNil
+    case messageIsNil
+    case fileNotUploaded
+    case imageLoadWrongResponse
+    case imageLoadInsufficientImageData
+    public static func == (a: ApiRTC.ApiRTCError.CloudApi, b: ApiRTC.ApiRTCError.CloudApi) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case cloudApi(ApiRTC.ApiRTCError.CloudApi)
+  public enum PreferredCSSCloudMessage : ApiRTC.E {
+    case cssIsNil
+    public static func == (a: ApiRTC.ApiRTCError.PreferredCSSCloudMessage, b: ApiRTC.ApiRTCError.PreferredCSSCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case preferredCSSCloudMessage(ApiRTC.ApiRTCError.PreferredCSSCloudMessage)
+  public enum CheckTokenCloudMessage : ApiRTC.E {
+    case resultCodeIsNil
+    public static func == (a: ApiRTC.ApiRTCError.CheckTokenCloudMessage, b: ApiRTC.ApiRTCError.CheckTokenCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case checkTokenCloudMessage(ApiRTC.ApiRTCError.CheckTokenCloudMessage)
+  public enum ConferenceInfo : ApiRTC.E {
+    case moderatorIdIsNil
+    case ownerIdIsNil
+    case hashIsNil
+    case hasPasswordIsNil
+    case participantsIsNil
+    case urlIsNil
+    case roomIdIsNil
+    case friendlyNameIsNil
+    public static func == (a: ApiRTC.ApiRTCError.ConferenceInfo, b: ApiRTC.ApiRTCError.ConferenceInfo) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case conferenceInfo(ApiRTC.ApiRTCError.ConferenceInfo)
+  public enum UserInfoCloudMessage : ApiRTC.E {
+    case photoUrlIsNil
+    case enterpriseIdIsNil
+    case userIdIsNil
+    case apiKeyIsNil
+    case usernameIsNil
+    case tokenIsNil
+    case isAgentIsNil
+    case ccsIsNil
+    public static func == (a: ApiRTC.ApiRTCError.UserInfoCloudMessage, b: ApiRTC.ApiRTCError.UserInfoCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case userInfoCloudMessage(ApiRTC.ApiRTCError.UserInfoCloudMessage)
+  public enum EnterpriseInfoCloudMessage : ApiRTC.E {
+    case idIsNil
+    case nameIsNil
+    case domainIsNil
+    case preferredCCSIsNil
+    case apiKeyIsNil
+    public static func == (a: ApiRTC.ApiRTCError.EnterpriseInfoCloudMessage, b: ApiRTC.ApiRTCError.EnterpriseInfoCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case enterpriseInfoCloudMessage(ApiRTC.ApiRTCError.EnterpriseInfoCloudMessage)
+  public enum EnterpriseUsersListCloudMessage : ApiRTC.E {
+    case usersIsNil
+    public static func == (a: ApiRTC.ApiRTCError.EnterpriseUsersListCloudMessage, b: ApiRTC.ApiRTCError.EnterpriseUsersListCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case enterpriseUsersListCloudMessage(ApiRTC.ApiRTCError.EnterpriseUsersListCloudMessage)
+  public enum EnterpriseTagsCloudMessage : ApiRTC.E {
+    case tagsIsNil
+    public static func == (a: ApiRTC.ApiRTCError.EnterpriseTagsCloudMessage, b: ApiRTC.ApiRTCError.EnterpriseTagsCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case enterpriseTagsCloudMessage(ApiRTC.ApiRTCError.EnterpriseTagsCloudMessage)
+  public enum EnterpriseCreateConferenceCloudMessage : ApiRTC.E {
+    case roomIdIsNil
+    case hashIsNil
+    public static func == (a: ApiRTC.ApiRTCError.EnterpriseCreateConferenceCloudMessage, b: ApiRTC.ApiRTCError.EnterpriseCreateConferenceCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case enterpriseCreateConferenceCloudMessage(ApiRTC.ApiRTCError.EnterpriseCreateConferenceCloudMessage)
+  public enum EnterpriseUploadFileCloudMessage : ApiRTC.E {
+    case urlIsNil
+    public static func == (a: ApiRTC.ApiRTCError.EnterpriseUploadFileCloudMessage, b: ApiRTC.ApiRTCError.EnterpriseUploadFileCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case enterpriseUploadFileCloudMessage(ApiRTC.ApiRTCError.EnterpriseUploadFileCloudMessage)
+  public enum ConversationCheckAccessCloudMessage : ApiRTC.E {
+    case typeIsNil
+    case typeIsUnknown(Swift.String)
+    case accessIsNil
+    case accessTypeIsUnknown(Swift.String)
+    case roleIsNil
+    case roleIsUnknown(Swift.String)
+    case friendlyNameIsNil
+    case instanceIdIsNil
+    case cloudConversationIdIsNil
+  }
+  case conversationCheckAccessCloudMessage(ApiRTC.ApiRTCError.ConversationCheckAccessCloudMessage)
+  public enum ConversationGetOrCreateCloudMessage : ApiRTC.E {
+    case idIsNil
+    case nameIsNil
+    case stateIsNil
+    case stateIsUnknown(Swift.String)
+  }
+  case conversationGetOrCreateCloudMessage(ApiRTC.ApiRTCError.ConversationGetOrCreateCloudMessage)
+  public enum MediaListCloudMessage : ApiRTC.E {
+    case mediaListIsNil
+    public static func == (a: ApiRTC.ApiRTCError.MediaListCloudMessage, b: ApiRTC.ApiRTCError.MediaListCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum MediaCloudMessage : ApiRTC.E {
+    case allConvIsNil
+    case urlIsNil
+    case convIdIsNil
+    case idIsNil
+    public static func == (a: ApiRTC.ApiRTCError.MediaCloudMessage, b: ApiRTC.ApiRTCError.MediaCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case mediaCloudMessage(ApiRTC.ApiRTCError.MediaCloudMessage)
+  public enum MediaUploadCloudMessage : ApiRTC.E {
+    case uploadedIsNil
+    case infoIsNil
+    case urlIsNil
+    case idIsNil
+    public static func == (a: ApiRTC.ApiRTCError.MediaUploadCloudMessage, b: ApiRTC.ApiRTCError.MediaUploadCloudMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case mediaUploadCloudMessage(ApiRTC.ApiRTCError.MediaUploadCloudMessage)
+  public enum Utils : ApiRTC.E {
+    case jsonStringIsNil
+    public static func == (a: ApiRTC.ApiRTCError.Utils, b: ApiRTC.ApiRTCError.Utils) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case utils(ApiRTC.ApiRTCError.Utils)
+  public enum Socket : ApiRTC.E {
+    case unknown
+    case managerIsNil
+    case socketIsNil
+    case wrongDataFormat
+    case socketStatusIsNotConnected(Any)
+    case cantReadIncomingMessageJson
+  }
+  case socket(ApiRTC.ApiRTCError.Socket)
+  public enum SocketMessage : ApiRTC.E {
+    case initDataHasWrongFormat
+    case initDataHasUnknownType(Swift.String)
+  }
+  case socketMessage(ApiRTC.ApiRTCError.SocketMessage)
+  public enum PresenceSocketMessage : ApiRTC.E {
+    case groupIsNil
+    case stateIsNil
+    case unknownState(Swift.String)
+    case contactsAreNil
+  }
+  case prsenceSocketMessage(ApiRTC.ApiRTCError.PresenceSocketMessage)
+  public enum Call : ApiRTC.E {
+    case streamIsNil
+    case mediaStreamIsNotNil
+    public static func == (a: ApiRTC.ApiRTCError.Call, b: ApiRTC.ApiRTCError.Call) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case call(ApiRTC.ApiRTCError.Call)
+  public enum CallManager : ApiRTC.E {
+    case cantCallToMyselfId(Swift.String)
+    case thereIsAlreadyActiveCallWithId(Swift.String)
+    case streamIsNil
+    case streamIsNotPublished
+    case sdpIsNil
+    case noCallWithId(Swift.String)
+    case answerSdpIsNil
+    case answerMessageHasNilAnswer
+    case activeCallIsNil
+    case callIsNotActive
+  }
+  case callManager(ApiRTC.ApiRTCError.CallManager)
+  public enum RTCClient : ApiRTC.E {
+    case streamIsNil
+    case unsupportedStreamTypeInCurrentContext(Any)
+    case mediaStreamIsNil
+    case videoSourceIsNil
+    case videoTrackIsNil
+    case audioSourceIsNil
+    case audioTrackIsNil
+    case embedCapturerIsNil
+    case extCapturerIsNil
+    case streamCaptureDeviceIsNil
+    case streamCaptureFormatIsNil
+    case rsdpIsNil
+  }
+  case rtcClient(ApiRTC.ApiRTCError.RTCClient)
+  public enum RTCSocketMessage : ApiRTC.E {
+    case roomIdIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RTCSocketMessage, b: ApiRTC.ApiRTCError.RTCSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case rtcSocketMessage(ApiRTC.ApiRTCError.RTCSocketMessage)
+  public enum RTCInviteSocketMessage : ApiRTC.E {
+    case callIdIsNil
+    case callerIdIsNil
+    case calleeIdIsNil
+    case streamTypeIsNil
+    case unknownStreamType(Any)
+    case sdpDictIsNil
+  }
+  case rtcInviteSocketMessage(ApiRTC.ApiRTCError.RTCInviteSocketMessage)
+  public enum RTCAnswerSocketMessage : ApiRTC.E {
+    case callIdIsNil
+    case callerIdIsNil
+    case calleeIdIsNil
+    case sdpDictIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RTCAnswerSocketMessage, b: ApiRTC.ApiRTCError.RTCAnswerSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case rtcAnswerSocketMessage(ApiRTC.ApiRTCError.RTCAnswerSocketMessage)
+  public enum RTCCandidateSocketMessage : ApiRTC.E {
+    case callIdIsNil
+    case callerIdIsNil
+    case calleeIdIsNil
+    case dstIsNil
+    case candidateIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RTCCandidateSocketMessage, b: ApiRTC.ApiRTCError.RTCCandidateSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case rtcCandidateSocketMessage(ApiRTC.ApiRTCError.RTCCandidateSocketMessage)
+  public enum RTCByeSocketMessage : ApiRTC.E {
+    case callIdIsNil
+    case clientIdIsNil
+    case dstIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RTCByeSocketMessage, b: ApiRTC.ApiRTCError.RTCByeSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case rtcByeSocketMessage(ApiRTC.ApiRTCError.RTCByeSocketMessage)
+  public enum RTCUpdateSocketMessage : ApiRTC.E {
+    case callIdIsNil
+    case callerIdIsNil
+    case calleeIdIsNil
+    case dstNil
+    case sdpDictIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RTCUpdateSocketMessage, b: ApiRTC.ApiRTCError.RTCUpdateSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case rtcUpdateSocketMessage(ApiRTC.ApiRTCError.RTCUpdateSocketMessage)
+  public enum RTCAnswerUpdateSocketMessage : ApiRTC.E {
+    case callIdIsNil
+    case callerIdIsNil
+    case calleeIdIsNil
+    case dstNil
+    case sdpDictIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RTCAnswerUpdateSocketMessage, b: ApiRTC.ApiRTCError.RTCAnswerUpdateSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case rtcAnswerUpdateSocketMessage(ApiRTC.ApiRTCError.RTCAnswerUpdateSocketMessage)
+  public enum SDP : ApiRTC.E {
+    case sdpIsNil
+    public static func == (a: ApiRTC.ApiRTCError.SDP, b: ApiRTC.ApiRTCError.SDP) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case sdp(ApiRTC.ApiRTCError.SDP)
+  public enum RTCCandidate : ApiRTC.E {
+    case typeIsNil
+    case unknowType(Swift.String)
+    case sdpIsNil
+    case sdpMlineIndexIsNil
+    case sdpMidIsNil
+    case sdpMidUnknown(Swift.String)
+  }
+  case candidate(ApiRTC.ApiRTCError.RTCCandidate)
+  public enum Conversation : ApiRTC.E {
+    case messageIsNil
+    public static func == (a: ApiRTC.ApiRTCError.Conversation, b: ApiRTC.ApiRTCError.Conversation) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case conversation(ApiRTC.ApiRTCError.Conversation)
+  public enum ConversationCall : ApiRTC.E {
+    case streamIsNil
+    case mediaStreamIsNotNil
+    case conversationIsNil
+    public static func == (a: ApiRTC.ApiRTCError.ConversationCall, b: ApiRTC.ApiRTCError.ConversationCall) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case conversationCall(ApiRTC.ApiRTCError.ConversationCall)
+  public enum ConversationManager : ApiRTC.E {
+    case joinFailed(Swift.String?)
+    case conversationWrongStatus
+    case sdpIsNil
+    case incorrectMediaRestriction
+    case statusIsNil
+    case alreadyJoined
+    case apiKeyIsNil
+    case tokenIsNil
+    case messageIsNil
+    case wrongAccessType
+    case moderatorIdIsNil
+    case conversationIsNotJoined
+    case joinCancelled
+    case typeIsNil
+    case urlStringMalformed
+    case urlStringMalformed2
+    case urlStringWrongPath
+    case urlStringWrongPathComponents
+    case wrongEnterpriseIdFormat
+    case wrongConversationIdFormat
+    case wrongRoomIdFormat
+    case callIsNil
+  }
+  case conversationManager(ApiRTC.ApiRTCError.ConversationManager)
+  public enum ConversationJoinAnswerSocketMessage : ApiRTC.E {
+    case roomNameIsNil
+    public static func == (a: ApiRTC.ApiRTCError.ConversationJoinAnswerSocketMessage, b: ApiRTC.ApiRTCError.ConversationJoinAnswerSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case conversationJoinAnswerSocketMessage(ApiRTC.ApiRTCError.ConversationJoinAnswerSocketMessage)
+  public enum ConversationAvailableStreamsSocketMessage : ApiRTC.E {
+    case streamsIsNil
+    public static func == (a: ApiRTC.ApiRTCError.ConversationAvailableStreamsSocketMessage, b: ApiRTC.ApiRTCError.ConversationAvailableStreamsSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case conversationAvailableStreamsSocketMessage(ApiRTC.ApiRTCError.ConversationAvailableStreamsSocketMessage)
+  public enum ConversationRemoveStreamSocketMessage : ApiRTC.E {
+    case streamIsNil
+    case streamIdIsNil
+    case clientIdIsNil
+    public static func == (a: ApiRTC.ApiRTCError.ConversationRemoveStreamSocketMessage, b: ApiRTC.ApiRTCError.ConversationRemoveStreamSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case conversationRemoveStreamSocketMessage(ApiRTC.ApiRTCError.ConversationRemoveStreamSocketMessage)
+  public enum RoomSocketMessage : ApiRTC.E {
+    case roomIdIsNil
+    case roomTypeUnknown(Swift.String)
+  }
+  case roomSocketMessage(ApiRTC.ApiRTCError.RoomSocketMessage)
+  public enum RoomCreationSocketMessage : ApiRTC.E {
+    case statusIsNil
+    case statusIsUnknown(Swift.String)
+  }
+  case roomCreationSocketMessage(ApiRTC.ApiRTCError.RoomCreationSocketMessage)
+  public enum RoomJoinAnswerSocketMessage : ApiRTC.E {
+    case statusIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RoomJoinAnswerSocketMessage, b: ApiRTC.ApiRTCError.RoomJoinAnswerSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case roomJoinAnswerSocketMessage(ApiRTC.ApiRTCError.RoomJoinAnswerSocketMessage)
+  public enum RoomInviteStatusSocketMessage : ApiRTC.E {
+    case contactIdIsNil
+    case invitationStatusIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RoomInviteStatusSocketMessage, b: ApiRTC.ApiRTCError.RoomInviteStatusSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case roomInviteStatusSocketMessage(ApiRTC.ApiRTCError.RoomInviteStatusSocketMessage)
+  public enum RoomInvitationSocketMessage : ApiRTC.E {
+    case senderIdIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RoomInvitationSocketMessage, b: ApiRTC.ApiRTCError.RoomInvitationSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case roomInvitationSocketMessage(ApiRTC.ApiRTCError.RoomInvitationSocketMessage)
+  public enum RoomMemberUpdateSocketMessage : ApiRTC.E {
+    case statusIsNil
+    case statusUnknown(Swift.String)
+    case contactListIsNil
+    case contactIdIsNil
+  }
+  case roomMemberUpdateSocketMessage(ApiRTC.ApiRTCError.RoomMemberUpdateSocketMessage)
+  public enum RoomMessageSocketMessage : ApiRTC.E {
+    case senderIdIsNil
+    case messageDataIsNil
+    public static func == (a: ApiRTC.ApiRTCError.RoomMessageSocketMessage, b: ApiRTC.ApiRTCError.RoomMessageSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case roomMessageSocketMessage(ApiRTC.ApiRTCError.RoomMessageSocketMessage)
+  public enum DataSocketMessage : ApiRTC.E {
+    case noInitializerForType(Swift.String)
+    case dataDictIsNil
+    case unknownSubType(Swift.String)
+    case noSubType
+    case senderIdIsNil
+  }
+  case dataSocketMessage(ApiRTC.ApiRTCError.DataSocketMessage)
+  public enum InvitationAnswerDataSocketMessage : ApiRTC.E {
+    case invitationIdIsNil
+    case answerIsNil
+    case answerHasUnknownType(Swift.String)
+  }
+  case invitationAnswerDataSocketMessage(ApiRTC.ApiRTCError.InvitationAnswerDataSocketMessage)
+  public enum ConversationInvitationDataSocketMessage : ApiRTC.E {
+    case invitationIdIsNil
+    case sendTimeIsNil
+    case roomNameIsNil
+    case cantExctractRoomId
+    public static func == (a: ApiRTC.ApiRTCError.ConversationInvitationDataSocketMessage, b: ApiRTC.ApiRTCError.ConversationInvitationDataSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case conversationInvitationDataSocketMessage(ApiRTC.ApiRTCError.ConversationInvitationDataSocketMessage)
+  public enum StreamTrackChangedDataSocketMessage : ApiRTC.E {
+    case callIdIsNil
+    case callerIdIsNil
+    case calleeIdIsNil
+    case lineTypeIsNil
+    case unknownLineType(Swift.String)
+    case isMutedIsNil
+    case roomIdIsNil
+  }
+  case streamTrackChangedDataSocketMessage(ApiRTC.ApiRTCError.StreamTrackChangedDataSocketMessage)
+  public enum CommandDataSocketMessage : ApiRTC.E {
+    case commandIsNil
+    case unknownCommand(Swift.String)
+    case noInitializerForCommandType(Swift.String)
+    case roomNameIsNil
+    case valueIsNil
+  }
+  case commandDataSocketMessage(ApiRTC.ApiRTCError.CommandDataSocketMessage)
+  public enum JoinAccessCommandDataSocketMessage : ApiRTC.E {
+    case accessIsNil
+    public static func == (a: ApiRTC.ApiRTCError.JoinAccessCommandDataSocketMessage, b: ApiRTC.ApiRTCError.JoinAccessCommandDataSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case joinAccessCommandDataSocketMessage(ApiRTC.ApiRTCError.JoinAccessCommandDataSocketMessage)
+  public enum JoinAccessNewCommandDataSocketMessage : ApiRTC.E {
+    case accessIsNil
+    public static func == (a: ApiRTC.ApiRTCError.JoinAccessNewCommandDataSocketMessage, b: ApiRTC.ApiRTCError.JoinAccessNewCommandDataSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case joinAccessNewCommandDataSocketMessage(ApiRTC.ApiRTCError.JoinAccessNewCommandDataSocketMessage)
+  public enum WhiteboardManager : ApiRTC.E {
+    case clientIsNotNil
+    case clientIsNil
+    case roomIsNotNil
+    case roomIsNil
+    public static func == (a: ApiRTC.ApiRTCError.WhiteboardManager, b: ApiRTC.ApiRTCError.WhiteboardManager) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case whiteboardManager(ApiRTC.ApiRTCError.WhiteboardManager)
+  public enum DrawingElement : ApiRTC.E {
+    case unknownTool(Any)
+    case noTool
+  }
+  case drawingElement(ApiRTC.ApiRTCError.DrawingElement)
+  public enum TextElement : ApiRTC.E {
+    case noText
+    public static func == (a: ApiRTC.ApiRTCError.TextElement, b: ApiRTC.ApiRTCError.TextElement) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case textElement(ApiRTC.ApiRTCError.TextElement)
+  public enum Invitation : ApiRTC.E {
+    case isNotStandBy(Any)
+  }
+  case invitation(ApiRTC.ApiRTCError.Invitation)
+  public enum ReceivedConversationInvitation : ApiRTC.E {
+    case conversationIsNil
+    public static func == (a: ApiRTC.ApiRTCError.ReceivedConversationInvitation, b: ApiRTC.ApiRTCError.ReceivedConversationInvitation) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case receivedConversationInvitation(ApiRTC.ApiRTCError.ReceivedConversationInvitation)
+  public enum Enterprise : ApiRTC.E {
+    case messageIsNil
+    case tokenIsNil
+    public static func == (a: ApiRTC.ApiRTCError.Enterprise, b: ApiRTC.ApiRTCError.Enterprise) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case enterprise(ApiRTC.ApiRTCError.Enterprise)
+  public enum Agent : ApiRTC.E {
+    case idIsNil
+    case nicknameIsNil
+    case isPreferedIsNil
+    public static func == (a: ApiRTC.ApiRTCError.Agent, b: ApiRTC.ApiRTCError.Agent) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case agent(ApiRTC.ApiRTCError.Agent)
+  public enum EnterpriseTag : ApiRTC.E {
+    case idIsNil
+    case nameIsNil
+    public static func == (a: ApiRTC.ApiRTCError.EnterpriseTag, b: ApiRTC.ApiRTCError.EnterpriseTag) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  case enterpriseTag(ApiRTC.ApiRTCError.EnterpriseTag)
+  public enum ChatSocketMessage : ApiRTC.E {
+    case IMIdIsNil
+    case senderIdIsNil
+    case dataIsNil
+    public static func == (a: ApiRTC.ApiRTCError.ChatSocketMessage, b: ApiRTC.ApiRTCError.ChatSocketMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum GroupChatMessage : ApiRTC.E {
+    case groupChatIdIsNil
+    case senderIdIsNil
+    case dataIsNil
+    public static func == (a: ApiRTC.ApiRTCError.GroupChatMessage, b: ApiRTC.ApiRTCError.GroupChatMessage) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum NewConversationCreated : ApiRTC.E {
+    case IMIdIsNil
+    case senderIdIsNil
+    public static func == (a: ApiRTC.ApiRTCError.NewConversationCreated, b: ApiRTC.ApiRTCError.NewConversationCreated) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum GroupChatMemberUpdateSocketMessage : ApiRTC.E {
+    case statusIsNil
+    case statusUnknown(Swift.String)
+    case contactListIsNil
+    case contactIdIsNil
+    case groupChatIdIsNil
+  }
+}
+public struct PublishOptions {
+  public var mediaRestriction: ApiRTC.StreamMediaRestriction? {
+    get
+  }
+  public init(mediaRestriction: ApiRTC.StreamMediaRestriction? = nil)
+}
+public struct RegisterInformation {
+  public var cloudUrl: Swift.String? {
+    get
+  }
+  public var cloudFetchRetries: Swift.Int? {
+    get
+  }
+  public var cloudFetchRetryDelay: Foundation.TimeInterval? {
+    get
+  }
+  public var id: Swift.String? {
+    get
+  }
+  public var mcu: Swift.String? {
+    get
+  }
+  public var ccs: Swift.String? {
+    get
+  }
+  public var password: Swift.String? {
+    get
+  }
+  public var groups: [Swift.String]? {
+    get
+  }
+  public var subscribeTo: [Swift.String]? {
+    get
+  }
+  public var userData: ApiRTC.UserData? {
+    get
+  }
+  public var turnServerAddress: Swift.String? {
+    get
+  }
+  public init(cloudUrl: Swift.String? = nil, cloudFetchRetries: Swift.Int? = nil, id: Swift.String? = nil, cloudFetchRetryDelay: Foundation.TimeInterval? = nil, mcu: Swift.String? = nil, css: Swift.String? = nil, password: Swift.String? = nil, groups: [Swift.String]? = nil, subscribeTo: [Swift.String]? = nil, userData: ApiRTC.UserData? = nil, turnServerAddress: Swift.String? = nil)
+  public init(password: Swift.String)
+}
+public enum DrawingElementType {
+  case cursor
+  case drawing
+  case catchUp
+  public static func == (a: ApiRTC.DrawingElementType, b: ApiRTC.DrawingElementType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers open class DrawingElement {
+  open var type: ApiRTC.DrawingElementType {
+    get
+  }
+  open var tool: ApiRTC.WhiteboardTool {
+    get
+  }
+  open var id: Swift.Int {
+    get
+  }
+  open var userId: Swift.String {
+    get
+  }
+  open var fromPoint: CoreGraphics.CGPoint {
+    get
+  }
+  open var toPoint: CoreGraphics.CGPoint {
+    get
+  }
+  open var color: UIKit.UIColor {
+    get
+  }
+  open var width: Swift.Int {
+    get
+  }
+  open var createdAt: Swift.Int {
+    get
+  }
+  open var sheetId: Swift.Int {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class Media {
+  open var id: Swift.Int! {
+    get
+  }
+  open var filename: Swift.String? {
+    get
+  }
+  open var title: Swift.String? {
+    get
+  }
+  open var type: Swift.Int? {
+    get
+  }
+  open var mediaHash: Swift.String? {
+    get
+  }
+  open var convId: Swift.Int! {
+    get
+  }
+  open var eid: Swift.Int? {
+    get
+  }
+  open var mediaDescription: Swift.String? {
+    get
+  }
+  open var metadata: Swift.String? {
+    get
+  }
+  open var url: Swift.String! {
+    get
+  }
+  open var createdAt: Foundation.Date? {
+    get
+  }
+  open var userId: Swift.Int? {
+    get
+  }
+  open var allConv: [ApiRTC.MediaConv]? {
+    get
+  }
+  open var allReportPart: Swift.String? {
+    get
+  }
+  open var thumbnail: UIKit.UIImage? {
+    get
+  }
+  open func thumbnailUrl() -> Foundation.URL?
+  open func imageUrl() -> Foundation.URL?
+  open func thumbnail(completion: @escaping (UIKit.UIImage?, Swift.Error?) -> Swift.Void)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class MediaUploaded {
+  open var id: Swift.String! {
+    get
+  }
+  open var url: Swift.String! {
+    get
+  }
+  @objc deinit
+}
+public enum LogType {
+  case info
+  case warning
+  case error
+  case debug
+  case socket
+  case cloud
+  public static func == (a: ApiRTC.LogType, b: ApiRTC.LogType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum RendererType {
+  case eagl
+  case metal
+  public static func == (a: ApiRTC.RendererType, b: ApiRTC.RendererType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc open class VideoView : UIKit.UIView {
+  open var renderer: WebRTC.RTCVideoRenderer {
+    get
+  }
+  open var rendererType: ApiRTC.RendererType! {
+    get
+  }
+  @objc override dynamic open var contentMode: UIKit.UIView.ContentMode {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic open var frame: CoreGraphics.CGRect {
+    @objc get
+    @objc set
+  }
+  open var videoSize: CoreGraphics.CGSize {
+    get
+  }
+  open var layoutOnVideoSizeChange: Swift.Bool
+  open var isContentModeSwitchable: Swift.Bool {
+    get
+  }
+  public init(frame: CoreGraphics.CGRect = .zero, renderer: ApiRTC.RendererType = .metal)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic open func layoutSubviews()
+  open func onVideoSizeChange(_ onVideoSizeChange: @escaping ((CoreGraphics.CGSize) -> Swift.Void))
+  open func takeSnapshot(rect: CoreGraphics.CGRect? = nil) -> UIKit.UIImage?
+  @objc deinit
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+}
+extension VideoView : WebRTC.RTCVideoViewDelegate {
+  @objc dynamic public func videoView(_ videoView: WebRTC.RTCVideoRenderer, didChangeVideoSize size: CoreGraphics.CGSize)
+}
+public enum SessionConnectionState : Swift.Equatable {
+  case offline
+  case connecting
+  case connected
+  case disconnected
+  case reconnecting
+  public static func == (lhs: ApiRTC.SessionConnectionState, rhs: ApiRTC.SessionConnectionState) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum SessionEvent : ApiRTC.Event {
+  case disconnected
+  case reconnecting
+  case reconnected
+  case contactListUpdate(ApiRTC.ContactListUpdate)
+  case incomingCall(ApiRTC.ReceivedCallInvitation)
+  case conversationInvitation(ApiRTC.ReceivedConversationInvitation)
+  case receiveContactMessage(ApiRTC.ContactMessage)
+  case externalCameraStateUpdate(ApiRTC.ExternalCameraState)
+  case rawData([Swift.String : Any?])
+  case error(Swift.Error)
+  public static func == (lhs: ApiRTC.SessionEvent, rhs: ApiRTC.SessionEvent) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers open class Session : ApiRTC.Observable<ApiRTC.SessionEvent> {
+  open var id: Swift.String! {
+    get
+  }
+  open var connectionState: ApiRTC.SessionConnectionState {
+    get
+  }
+  open var externalCameraState: ApiRTC.ExternalCameraState {
+    get
+  }
+  open func getToken() -> Swift.String?
+  open func joinGroup(_ group: Swift.String)
+  open func leaveGroup(_ group: Swift.String)
+  open func getContact(id: Swift.String) -> ApiRTC.Contact
+  open func getContacts(group: Swift.String? = nil) -> [ApiRTC.Contact]?
+  open func getOrCreateConversation(name: Swift.String) throws -> ApiRTC.Conversation
+  open func getOrCreateConversation(url: Swift.String) throws -> ApiRTC.Conversation
+  open func getActiveConversations() -> [ApiRTC.Conversation]?
+  open class func getActiveSession() -> ApiRTC.Session?
+  open func getUserAgent() -> ApiRTC.UserAgent
+  open func onEvent(_ observer: Swift.AnyObject, _ callback: @escaping ((ApiRTC.SessionEvent) -> Swift.Void))
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct JoinOptions {
+}
+public enum StreamEvent : ApiRTC.Event {
+  case captureSession(AVFoundation.AVCaptureSession)
+  case mediaStream(ApiRTC.MediaStream)
+  case externalCameraFrame(UIKit.UIImage)
+  case muteStateChange(ApiRTC.StreamMuteStateChange)
+  case error(Swift.Error)
+  public static func == (lhs: ApiRTC.StreamEvent, rhs: ApiRTC.StreamEvent) -> Swift.Bool
+}
+public enum StreamType {
+  case unknown
+  case video
+  case videoOnly
+  case audio
+  case screen
+  case externalCamera
+  public static func == (a: ApiRTC.StreamType, b: ApiRTC.StreamType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum StreamMutingLineType {
+  case video
+  case audio
+  public static func == (a: ApiRTC.StreamMutingLineType, b: ApiRTC.StreamMutingLineType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum StreamMediaRestriction {
+  case videoOnly
+  case audioOnly
+  public static func == (a: ApiRTC.StreamMediaRestriction, b: ApiRTC.StreamMediaRestriction) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum StreamDirection {
+  case published
+  case subscribed
+  public static func == (a: ApiRTC.StreamDirection, b: ApiRTC.StreamDirection) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers open class Stream : ApiRTC.Observable<ApiRTC.StreamEvent> {
+  open var id: Swift.String! {
+    get
+  }
+  open var type: ApiRTC.StreamType {
+    get
+  }
+  open var direction: ApiRTC.StreamDirection {
+    get
+  }
+  open var captureSession: AVFoundation.AVCaptureSession? {
+    get
+  }
+  open var device: AVFoundation.AVCaptureDevice? {
+    get
+  }
+  open var format: AVFoundation.AVCaptureDevice.Format? {
+    get
+  }
+  open var mediaStream: ApiRTC.MediaStream? {
+    get
+  }
+  open class func createCameraStream(position: AVFoundation.AVCaptureDevice.Position, format: AVFoundation.AVCaptureDevice.Format? = nil) throws -> ApiRTC.Stream
+  open class func createAudioStream() -> ApiRTC.Stream
+  open class func createExternalCameraStream() -> ApiRTC.Stream
+  open func muteAudio()
+  open func unmuteAudio()
+  open func muteVideo()
+  open func unmuteVideo()
+  open func isAudioMuted() -> Swift.Bool
+  open func isVideoMuted() -> Swift.Bool
+  open func hasAudio() -> Swift.Bool
+  open func hasVideo() -> Swift.Bool
+  open class func supportedFormats(_ device: AVFoundation.AVCaptureDevice) -> [AVFoundation.AVCaptureDevice.Format]
+  open func addRenderer(_ renderer: WebRTC.RTCVideoRenderer)
+  open func getOwner() -> ApiRTC.Contact
+  open func getConversations() -> [ApiRTC.Conversation]?
+  open func onEvent(_ observer: Swift.AnyObject, _ callback: @escaping ((ApiRTC.StreamEvent) -> Swift.Void))
+  @objc deinit
+}
+extension ApiRTC.Enterprise : Swift.CustomStringConvertible {}
+extension ApiRTC.ContactListUpdateType : Swift.Equatable {}
+extension ApiRTC.ContactListUpdateType : Swift.Hashable {}
+extension ApiRTC.GroupChatMessageEvent : Swift.Hashable {}
+extension ApiRTC.WhiteboardTool : Swift.Equatable {}
+extension ApiRTC.WhiteboardTool : Swift.Hashable {}
+extension ApiRTC.CallStatus : Swift.Equatable {}
+extension ApiRTC.CallStatus : Swift.Hashable {}
+extension ApiRTC.AudioTrack : Swift.CustomStringConvertible {}
+extension ApiRTC.UserAgent : Swift.CustomStringConvertible {}
+extension ApiRTC.ContactMessageEvent : Swift.Hashable {}
+extension ApiRTC.ExternalCameraState : Swift.Equatable {}
+extension ApiRTC.ExternalCameraState : Swift.Hashable {}
+extension ApiRTC.RoomMemberUpdateType : Swift.Equatable {}
+extension ApiRTC.RoomMemberUpdateType : Swift.Hashable {}
+extension ApiRTC.VideoTrack : Swift.CustomStringConvertible {}
+extension ApiRTC.ContactCallState : Swift.Equatable {}
+extension ApiRTC.ContactCallState : Swift.Hashable {}
+extension ApiRTC.InvitationStatus : Swift.Equatable {}
+extension ApiRTC.InvitationStatus : Swift.Hashable {}
+extension ApiRTC.ConversationCallStatus : Swift.Equatable {}
+extension ApiRTC.ConversationCallStatus : Swift.Hashable {}
+extension ApiRTC.ConversationCall : Swift.CustomStringConvertible {}
+extension ApiRTC.WhiteboardViewMode : Swift.Equatable {}
+extension ApiRTC.WhiteboardViewMode : Swift.Hashable {}
+extension ApiRTC.ConversationStatus : Swift.Equatable {}
+extension ApiRTC.ConversationStatus : Swift.Hashable {}
+extension ApiRTC.ConversationUserRole : Swift.Equatable {}
+extension ApiRTC.ConversationUserRole : Swift.Hashable {}
+extension ApiRTC.ConversationAccess : Swift.Equatable {}
+extension ApiRTC.ConversationAccess : Swift.Hashable {}
+extension ApiRTC.MediaStream : Swift.CustomStringConvertible {}
+extension ApiRTC.StreamInfoType : Swift.Equatable {}
+extension ApiRTC.StreamInfoType : Swift.Hashable {}
+extension ApiRTC.CloudApi : Swift.CustomStringConvertible {}
+extension ApiRTC.MediaTrackType : Swift.Equatable {}
+extension ApiRTC.MediaTrackType : Swift.Hashable {}
+extension ApiRTC.MediaTrack : Swift.CustomStringConvertible {}
+extension ApiRTC.ApiRTCError.UserAgent : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.UserAgent : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.Sesssion : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.Sesssion : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.Token : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.Token : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.CloudApi : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.CloudApi : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.PreferredCSSCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.PreferredCSSCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.CheckTokenCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.CheckTokenCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ConferenceInfo : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ConferenceInfo : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.UserInfoCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.UserInfoCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.EnterpriseInfoCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.EnterpriseInfoCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.EnterpriseUsersListCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.EnterpriseUsersListCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.EnterpriseTagsCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.EnterpriseTagsCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.EnterpriseCreateConferenceCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.EnterpriseCreateConferenceCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.EnterpriseUploadFileCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.EnterpriseUploadFileCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.MediaListCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.MediaListCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.MediaCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.MediaCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.MediaUploadCloudMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.MediaUploadCloudMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.Utils : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.Utils : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.Call : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.Call : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RTCSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RTCSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RTCAnswerSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RTCAnswerSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RTCCandidateSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RTCCandidateSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RTCByeSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RTCByeSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RTCUpdateSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RTCUpdateSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RTCAnswerUpdateSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RTCAnswerUpdateSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.SDP : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.SDP : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.Conversation : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.Conversation : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ConversationCall : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ConversationCall : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ConversationJoinAnswerSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ConversationJoinAnswerSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ConversationAvailableStreamsSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ConversationAvailableStreamsSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ConversationRemoveStreamSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ConversationRemoveStreamSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RoomJoinAnswerSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RoomJoinAnswerSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RoomInviteStatusSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RoomInviteStatusSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RoomInvitationSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RoomInvitationSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.RoomMessageSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.RoomMessageSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ConversationInvitationDataSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ConversationInvitationDataSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.JoinAccessCommandDataSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.JoinAccessCommandDataSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.JoinAccessNewCommandDataSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.JoinAccessNewCommandDataSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.WhiteboardManager : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.WhiteboardManager : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.TextElement : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.TextElement : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ReceivedConversationInvitation : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ReceivedConversationInvitation : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.Enterprise : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.Enterprise : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.Agent : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.Agent : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.EnterpriseTag : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.EnterpriseTag : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.ChatSocketMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.ChatSocketMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.GroupChatMessage : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.GroupChatMessage : Swift.Hashable {}
+extension ApiRTC.ApiRTCError.NewConversationCreated : Swift.Equatable {}
+extension ApiRTC.ApiRTCError.NewConversationCreated : Swift.Hashable {}
+extension ApiRTC.DrawingElementType : Swift.Equatable {}
+extension ApiRTC.DrawingElementType : Swift.Hashable {}
+extension ApiRTC.DrawingElement : Swift.CustomStringConvertible {}
+extension ApiRTC.LogType : Swift.Equatable {}
+extension ApiRTC.LogType : Swift.Hashable {}
+extension ApiRTC.RendererType : Swift.Equatable {}
+extension ApiRTC.RendererType : Swift.Hashable {}
+extension ApiRTC.SessionConnectionState : Swift.Hashable {}
+extension ApiRTC.StreamType : Swift.Equatable {}
+extension ApiRTC.StreamType : Swift.Hashable {}
+extension ApiRTC.StreamMutingLineType : Swift.Equatable {}
+extension ApiRTC.StreamMutingLineType : Swift.Hashable {}
+extension ApiRTC.StreamMediaRestriction : Swift.Equatable {}
+extension ApiRTC.StreamMediaRestriction : Swift.Hashable {}
+extension ApiRTC.StreamDirection : Swift.Equatable {}
+extension ApiRTC.StreamDirection : Swift.Hashable {}
