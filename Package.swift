@@ -3,10 +3,10 @@
 import PackageDescription
  
 let package = Package(
-    name: "ApiRTCPackage",
+    name: "ApiRTC",
     products: [
         .library(
-            name: "ApiRTCPackage",
+            name: "ApiRTC",
             targets: ["ApiRTC"]),
     ],
     dependencies: [
