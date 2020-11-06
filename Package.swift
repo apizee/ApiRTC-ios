@@ -9,9 +9,6 @@ let package = Package(
             name: "ApiRTCPackage",
             targets: ["ApiRTC"]),
     ],
-    targets: [
-        .binaryTarget(name: "ApiRTC", path: "./ApiRTC.xcframework")
-    ],
     dependencies: [
         .package(
             url: "https://github.com/robbiehanson/CocoaAsyncSocket", 
@@ -25,5 +22,8 @@ let package = Package(
             url: "https://github.com/ReactiveX/RxSwift", 
             from: "5.1.1"
         )
+    ],
+    targets: [
+        .binaryTarget(name: "ApiRTC", path: "./ApiRTC.xcframework")
     ]
 )
