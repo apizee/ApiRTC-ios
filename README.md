@@ -4,3 +4,5 @@ ApiRTC cloud-based WebRTC API are built for web and mobile developers. Empower y
 
 [Apizee](https://apizee.com/) takes care of browser compatibility, security and NAT traversal issues for you.
 
+
+# Deprecated in favor of [Swift version](https://github.com/apizee/ApiRTC-iOS-SDK) 
